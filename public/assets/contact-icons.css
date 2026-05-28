@@ -17,10 +17,25 @@
   align-items: center;
   justify-content: center;
   padding: 0 !important;
-  background-color: #ff440a !important;
 }
 
 .elementor-widget-social-icons .elementor-social-icon svg {
   width: 18px !important;
   height: 18px !important;
+  fill: currentColor;
+}
+
+.elementor-widget-social-icons .elementor-social-icon-whatsapp {
+  background-color: #25d366 !important;
+  color: #fff !important;
+}
+
+.elementor-widget-social-icons .elementor-social-icon-telegram {
+  background-color: #229ed9 !important;
+  color: #fff !important;
+}
+
+.elementor-widget-social-icons .elementor-social-icon-viber {
+  background-color: #7360f2 !important;
+  color: #fff !important;
 }
