@@ -541,8 +541,80 @@ body.vm-scrolled .vm-sticky-cta {
     display: none;
   }
 
+  .whb-general-header {
+    box-shadow: 0 8px 24px rgba(8, 36, 72, 0.08);
+  }
+
+  .whb-general-header-inner {
+    gap: 8px;
+    min-height: 64px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .whb-mobile-left {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .whb-mobile-center {
+    flex: 0 0 auto;
+    min-width: auto;
+  }
+
+  .whb-mobile-right {
+    flex: 0 0 auto;
+  }
+
   .site-logo img {
+    max-width: 142px !important;
     max-height: 44px;
+  }
+
+  .vm-mobile-header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .vm-mobile-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 13px;
+    border-radius: 8px;
+    background: var(--vm-orange);
+    color: #fff !important;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none !important;
+    box-shadow: 0 10px 22px rgba(241, 90, 36, 0.22);
+  }
+
+  .vm-mobile-trustbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 28px;
+    padding: 6px 12px;
+    border-top: 1px solid rgba(8, 36, 72, 0.08);
+    background: #fff;
+    color: var(--vm-blue);
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .wd-header-mobile-nav .wd-tools-text {
+    display: none;
+  }
+
+  .wd-header-mobile-nav .wd-tools-icon {
+    width: 40px;
+    height: 40px;
   }
 
   .elementor-3604 .elementor-element.elementor-element-8d1bf74 {
@@ -638,5 +710,29 @@ body.vm-scrolled .vm-sticky-cta {
     padding-right: 10px;
     padding-left: 10px;
     font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .site-logo img {
+    max-width: 120px !important;
+  }
+
+  .vm-mobile-call {
+    min-height: 36px;
+    width: 38px;
+    padding-right: 11px;
+    padding-left: 11px;
+    font-size: 0;
+  }
+
+  .vm-mobile-call::before {
+    content: "☎";
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .vm-mobile-trustbar {
+    font-size: 11px;
   }
 }

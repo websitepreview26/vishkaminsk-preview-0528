@@ -107,6 +107,24 @@ document.addEventListener("submit", function (event) {
     document.body.appendChild(sticky);
   }
 
+  function addMobileHeaderActions() {
+    var header = document.querySelector(".whb-header");
+    var mobileCenter = document.querySelector(".whb-mobile-center");
+    if (!header || !mobileCenter || mobileCenter.querySelector(".vm-mobile-header-actions")) return;
+
+    var actions = document.createElement("div");
+    actions.className = "vm-mobile-header-actions";
+    actions.innerHTML = '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить">Звонок</a>';
+    mobileCenter.appendChild(actions);
+
+    if (!header.querySelector(".vm-mobile-trustbar")) {
+      var trustbar = document.createElement("div");
+      trustbar.className = "vm-mobile-trustbar";
+      trustbar.textContent = "Подача от 1 часа • 22-28 м • без выходных";
+      header.appendChild(trustbar);
+    }
+  }
+
   function toggleStickyCta() {
     var isScrolled = window.scrollY > 420;
     document.body.classList.toggle("vm-scrolled", isScrolled);
@@ -137,6 +155,7 @@ document.addEventListener("submit", function (event) {
   ready(function () {
     enhanceHomePage();
     improvePrimaryActions();
+    addMobileHeaderActions();
     addStickyCta();
     toggleStickyCta();
     window.addEventListener("scroll", toggleStickyCta, { passive: true });
