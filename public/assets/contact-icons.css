@@ -1,0 +1,26 @@
+.elementor-widget-social-icons .elementor-social-icons-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.elementor-widget-social-icons .elementor-grid-item {
+  display: inline-flex;
+}
+
+.elementor-widget-social-icons .elementor-social-icon {
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 18px !important;
+  line-height: 36px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  background-color: #ff440a !important;
+}
+
+.elementor-widget-social-icons .elementor-social-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+}
