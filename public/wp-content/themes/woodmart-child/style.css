@@ -148,7 +148,7 @@ body {
 }
 
 .wd-nav-main > li > a {
-  border-radius: 6px;
+  border-radius: 999px;
   padding-right: 7px;
   padding-left: 7px;
   letter-spacing: 0;
@@ -165,8 +165,14 @@ body {
   display: none !important;
 }
 
-.wd-nav-main > li.current-menu-item > a,
 .wd-nav-main > li > a:hover {
+  background: transparent !important;
+  color: var(--vm-orange) !important;
+  box-shadow: none !important;
+}
+
+.wd-nav-main > li.current-menu-item > a,
+.wd-nav-main > li.current-menu-item > a:hover {
   background: #fff2ed !important;
   color: var(--vm-blue) !important;
   box-shadow: inset 0 0 0 1px rgba(241, 90, 36, 0.12);
