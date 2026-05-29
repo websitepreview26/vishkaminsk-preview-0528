@@ -49,6 +49,11 @@ body {
   margin-left: 0;
 }
 
+.main-page-wrapper {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 .site-content {
   flex: 0 0 100%;
 }
@@ -74,13 +79,31 @@ body {
   box-shadow: 0 8px 26px rgba(7, 24, 38, 0.08);
 }
 
+.whb-general-header > .container {
+  width: 100%;
+  max-width: none;
+  padding-right: 26px;
+  padding-left: 26px;
+}
+
 .whb-general-header-inner {
-  gap: 18px;
+  gap: 16px;
   min-height: 78px;
 }
 
+.whb-col-left.whb-visible-lg {
+  flex: 0 0 260px;
+}
+
+.whb-col-center.whb-visible-lg {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .whb-col-right.whb-visible-lg {
+  flex: 0 0 auto;
   gap: 18px;
+  white-space: nowrap;
 }
 
 .whb-col-right.whb-visible-lg .whb-space-element {
@@ -92,7 +115,7 @@ body {
   align-items: center;
   min-height: 44px;
   color: var(--vm-blue) !important;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 800;
   line-height: 1;
   text-decoration: none !important;
@@ -105,17 +128,36 @@ body {
 
 .site-logo img {
   width: auto;
-  max-width: 190px !important;
-  max-height: 54px;
+  max-width: 176px !important;
+  max-height: 50px !important;
   object-fit: contain;
+}
+
+.wd-header-main-nav {
+  min-width: 0;
+}
+
+.wd-nav-main {
+  flex-wrap: nowrap !important;
+  justify-content: center;
+  --nav-gap: 10px;
+}
+
+.wd-nav-main > li {
+  flex: 0 0 auto;
 }
 
 .wd-nav-main > li > a {
   border-radius: 6px;
-  padding-right: 9px;
-  padding-left: 9px;
+  padding-right: 7px;
+  padding-left: 7px;
   letter-spacing: 0;
+  font-size: 13px;
   text-transform: none;
+}
+
+.whb-general-header .wd-nav-main > li > a {
+  font-size: 13px !important;
 }
 
 .wd-nav-main > li.current-menu-item > a,
@@ -552,6 +594,50 @@ body {
   .elementor-3604 .elementor-element.elementor-element-58a6306,
   .reviews-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1360px) {
+  .whb-general-header > .container {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .whb-general-header-inner {
+    gap: 10px;
+  }
+
+  .whb-col-left.whb-visible-lg {
+    flex-basis: 200px;
+  }
+
+  .site-logo img {
+    max-width: 148px !important;
+  }
+
+  .wd-nav-main {
+    --nav-gap: 6px;
+  }
+
+  .whb-general-header .wd-nav-main > li > a {
+    padding-right: 5px;
+    padding-left: 5px;
+    font-size: 12px !important;
+  }
+
+  .whb-col-right.whb-visible-lg {
+    gap: 10px;
+  }
+
+  .vm-header-phone {
+    font-size: 14px;
+  }
+
+  .whb-header .wd-button-wrapper .btn {
+    min-height: 42px;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-size: 12px;
   }
 }
 
