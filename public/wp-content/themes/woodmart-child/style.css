@@ -616,8 +616,8 @@ body {
 }
 
 .wd-close-side {
-  background: rgba(5, 13, 22, 0.66);
-  backdrop-filter: blur(5px);
+  background: transparent;
+  backdrop-filter: none;
 }
 
 .mobile-nav.wd-side-hidden-nav {
@@ -628,6 +628,10 @@ body {
   border-left: 1px solid rgba(255, 255, 255, 0.12);
   background:
     linear-gradient(165deg, rgba(8, 36, 72, 0.98) 0%, rgba(16, 24, 32, 0.98) 58%, rgba(5, 13, 22, 0.98) 100%);
+  box-shadow: none;
+}
+
+.mobile-nav.wd-side-hidden-nav.wd-opened {
   box-shadow: -28px 0 70px rgba(5, 13, 22, 0.36);
 }
 
@@ -660,15 +664,19 @@ body {
 }
 
 .mobile-nav .wd-nav-mobile.wd-active {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: block;
+  width: 100%;
+  margin: 0;
 }
 
 .mobile-nav .wd-nav-mobile > li,
 .mobile-nav .wd-nav-mobile > li > ul li {
   position: relative;
   display: block;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: none;
+  margin-bottom: 8px;
 }
 
 .mobile-nav .wd-nav-mobile > li > a,
