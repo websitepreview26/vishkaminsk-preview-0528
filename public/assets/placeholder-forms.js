@@ -53,9 +53,9 @@ document.addEventListener("submit", function (event) {
     var proof = document.createElement("div");
     proof.className = "vm-hero-proof";
     proof.innerHTML = [
-      '<div class="vm-proof-item"><strong>1 час</strong><span>подача по Минску при наличии машины</span></div>',
-      '<div class="vm-proof-item"><strong>22-28 м</strong><span>рабочая высота под большинство задач</span></div>',
-      '<div class="vm-proof-item"><strong>7 дней</strong><span>работаем без выходных и лишних простоев</span></div>'
+      '<div class="vm-proof-item"><strong>Подача от 1 часа</strong></div>',
+      '<div class="vm-proof-item"><strong>22-28 м</strong></div>',
+      '<div class="vm-proof-item"><strong>Без выходных</strong></div>'
     ].join("");
     hero.appendChild(proof);
 
@@ -106,12 +106,18 @@ document.addEventListener("submit", function (event) {
     actions.innerHTML = '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить +375 29 205-15-79">+375 29 205-15-79</a>';
     mobileCenter.appendChild(actions);
 
-    if (!header.querySelector(".vm-mobile-trustbar")) {
-      var trustbar = document.createElement("div");
-      trustbar.className = "vm-mobile-trustbar";
-      trustbar.textContent = "Подача от 1 часа • 22-28 м • без выходных";
-      header.appendChild(trustbar);
-    }
+  }
+
+  function addDesktopHeaderPhone() {
+    var headerRight = document.querySelector(".whb-col-right.whb-visible-lg");
+    var button = headerRight ? headerRight.querySelector(".wd-button-wrapper") : null;
+    if (!headerRight || !button || headerRight.querySelector(".vm-header-phone")) return;
+
+    var phone = document.createElement("a");
+    phone.className = "vm-header-phone";
+    phone.href = "tel:+375292051579";
+    phone.textContent = "+375 29 205-15-79";
+    headerRight.insertBefore(phone, button);
   }
 
   function addFloatingCall() {
@@ -149,6 +155,7 @@ document.addEventListener("submit", function (event) {
   ready(function () {
     enhanceHomePage();
     improvePrimaryActions();
+    addDesktopHeaderPhone();
     addMobileHeaderActions();
     addFloatingCall();
   });
