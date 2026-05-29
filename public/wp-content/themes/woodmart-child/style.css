@@ -620,26 +620,25 @@ body {
   --wd-side-hidden-w: min(390px, 92vw);
   display: flex;
   flex-direction: column;
-  padding: calc(env(safe-area-inset-top) + 18px) 14px calc(env(safe-area-inset-bottom) + 18px);
-  border-left: 1px solid rgba(255, 255, 255, 0.12);
-  background:
-    linear-gradient(165deg, rgba(8, 36, 72, 0.98) 0%, rgba(16, 24, 32, 0.98) 58%, rgba(5, 13, 22, 0.98) 100%);
+  padding: calc(env(safe-area-inset-top) + 20px) 18px calc(env(safe-area-inset-bottom) + 20px);
+  border-left: 1px solid rgba(8, 36, 72, 0.08);
+  background: #fff;
   box-shadow: none;
 }
 
 .mobile-nav.wd-side-hidden-nav.wd-opened {
-  box-shadow: -28px 0 70px rgba(5, 13, 22, 0.36);
+  box-shadow: -18px 0 44px rgba(8, 36, 72, 0.14);
 }
 
 .mobile-nav.wd-side-hidden-nav::before {
   content: "Меню";
   display: flex;
   align-items: center;
-  min-height: 58px;
-  margin: 0 4px 14px;
-  padding: 0 56px 0 4px;
-  color: #fff;
-  font-size: 25px;
+  min-height: 52px;
+  margin: 0 2px 18px;
+  padding: 0 56px 0 2px;
+  color: var(--vm-blue);
+  font-size: 24px;
   font-weight: 800;
   line-height: 1;
 }
@@ -648,15 +647,16 @@ body {
   content: "Автовышка в Минске и области \A +375 29 205-15-79";
   display: block;
   margin-top: auto;
-  padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 17px 18px;
+  border: 1px solid rgba(241, 90, 36, 0.18);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.78);
+  background: linear-gradient(180deg, #fff8f5, #fff);
+  color: var(--vm-blue);
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.45;
   white-space: pre-line;
+  box-shadow: 0 12px 26px rgba(8, 36, 72, 0.07);
 }
 
 .mobile-nav .wd-nav-mobile.wd-active {
@@ -672,24 +672,27 @@ body {
   flex: 0 0 auto;
   width: 100%;
   max-width: none;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .mobile-nav .wd-nav-mobile > li > a,
 .mobile-nav .wd-nav-mobile > li > ul li > a {
-  min-height: 54px;
+  display: flex;
+  align-items: center;
+  min-height: 58px;
   margin: 0;
-  padding: 0 42px 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 42px 0 14px;
+  border: 1px solid transparent;
+  border-bottom-color: rgba(8, 36, 72, 0.08);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.88);
+  background: #fff;
+  color: var(--vm-ink);
   font-size: 15px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 0;
   text-transform: none;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: none;
 }
 
 .mobile-nav .wd-nav-mobile > li > a::after {
@@ -701,17 +704,17 @@ body {
   height: 8px;
   border-top: 2px solid currentColor;
   border-right: 2px solid currentColor;
-  opacity: 0.55;
+  opacity: 0.34;
   transform: translateY(-50%) rotate(45deg);
 }
 
 .mobile-nav .wd-nav-mobile > li:is(.current-menu-item, .current_page_item) > a,
 .mobile-nav .wd-nav-mobile > li > a:hover,
 .mobile-nav .wd-nav-mobile > li > a:focus {
-  border-color: rgba(241, 90, 36, 0.48);
-  background: rgba(241, 90, 36, 0.16);
-  color: #fff;
-  box-shadow: inset 4px 0 0 var(--vm-orange), 0 12px 24px rgba(5, 13, 22, 0.22);
+  border-color: rgba(241, 90, 36, 0.22);
+  background: #fff4ef;
+  color: var(--vm-blue);
+  box-shadow: inset 4px 0 0 var(--vm-orange);
 }
 
 .mobile-nav .wd-nav-mobile .nav-link-text {
