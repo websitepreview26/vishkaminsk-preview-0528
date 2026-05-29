@@ -610,10 +610,110 @@ body {
     display: none;
   }
 
-  .wd-header-mobile-nav .wd-tools-icon {
-    width: 40px;
-    height: 40px;
-  }
+.wd-header-mobile-nav .wd-tools-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.wd-close-side {
+  background: rgba(5, 13, 22, 0.66);
+  backdrop-filter: blur(5px);
+}
+
+.mobile-nav.wd-side-hidden-nav {
+  --wd-side-hidden-w: min(390px, 92vw);
+  display: flex;
+  flex-direction: column;
+  padding: calc(env(safe-area-inset-top) + 18px) 14px calc(env(safe-area-inset-bottom) + 18px);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    linear-gradient(165deg, rgba(8, 36, 72, 0.98) 0%, rgba(16, 24, 32, 0.98) 58%, rgba(5, 13, 22, 0.98) 100%);
+  box-shadow: -28px 0 70px rgba(5, 13, 22, 0.36);
+}
+
+.mobile-nav.wd-side-hidden-nav::before {
+  content: "Меню";
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  margin: 0 4px 14px;
+  padding: 0 56px 0 4px;
+  color: #fff;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mobile-nav.wd-side-hidden-nav::after {
+  content: "Автовышка в Минске и области \A +375 29 205-15-79";
+  display: block;
+  margin-top: auto;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.mobile-nav .wd-nav-mobile.wd-active {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobile-nav .wd-nav-mobile > li,
+.mobile-nav .wd-nav-mobile > li > ul li {
+  position: relative;
+  display: block;
+}
+
+.mobile-nav .wd-nav-mobile > li > a,
+.mobile-nav .wd-nav-mobile > li > ul li > a {
+  min-height: 54px;
+  margin: 0;
+  padding: 0 42px 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0;
+  text-transform: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.mobile-nav .wd-nav-mobile > li > a::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  opacity: 0.55;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.mobile-nav .wd-nav-mobile > li:is(.current-menu-item, .current_page_item) > a,
+.mobile-nav .wd-nav-mobile > li > a:hover,
+.mobile-nav .wd-nav-mobile > li > a:focus {
+  border-color: rgba(241, 90, 36, 0.48);
+  background: rgba(241, 90, 36, 0.16);
+  color: #fff;
+  box-shadow: inset 4px 0 0 var(--vm-orange), 0 12px 24px rgba(5, 13, 22, 0.22);
+}
+
+.mobile-nav .wd-nav-mobile .nav-link-text {
+  display: block;
+  overflow-wrap: anywhere;
+}
 
   .vm-floating-call {
     right: calc(env(safe-area-inset-right) + 14px);
