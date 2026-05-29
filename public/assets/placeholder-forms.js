@@ -109,7 +109,12 @@ document.addEventListener("submit", function (event) {
   }
 
   function addDesktopHeaderPhone() {
-    var headerRight = document.querySelector(".whb-col-right.whb-visible-lg");
+    var headerRight = Array.prototype.find.call(
+      document.querySelectorAll(".whb-general-header .whb-col-right.whb-visible-lg"),
+      function (column) {
+        return column.querySelector(".wd-button-wrapper");
+      }
+    );
     var button = headerRight ? headerRight.querySelector(".wd-button-wrapper") : null;
     if (!headerRight || !button || headerRight.querySelector(".vm-header-phone")) return;
 
