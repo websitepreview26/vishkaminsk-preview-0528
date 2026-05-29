@@ -114,6 +114,16 @@ document.addEventListener("submit", function (event) {
     }
   }
 
+  function addFloatingCall() {
+    if (document.querySelector(".vm-floating-call")) return;
+    var call = document.createElement("a");
+    call.className = "vm-floating-call";
+    call.href = "tel:+375292051579";
+    call.setAttribute("aria-label", "Позвонить +375 29 205-15-79");
+    call.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8c1.7 3.4 3.2 4.9 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1.3.4 2.6.7 4 .7.7 0 1.2.5 1.2 1.2v3.5c0 .7-.5 1.2-1.2 1.2C10.6 21.6 2.4 13.4 2.4 3.4c0-.7.5-1.2 1.2-1.2h3.5c.7 0 1.2.5 1.2 1.2 0 1.4.2 2.7.7 4 .1.4 0 .8-.3 1.2l-2.1 2.2z"></path></svg><span>Позвонить</span>';
+    document.body.appendChild(call);
+  }
+
   function improvePrimaryActions() {
     var callbackLinks = document.querySelectorAll('a[href$="contact-us/index.html"], a[href="../contact-us/index.html"]');
     callbackLinks.forEach(function (link) {
@@ -140,5 +150,6 @@ document.addEventListener("submit", function (event) {
     enhanceHomePage();
     improvePrimaryActions();
     addMobileHeaderActions();
+    addFloatingCall();
   });
 })();

@@ -181,6 +181,42 @@ body {
   padding: 15px 22px;
 }
 
+.elementor-3604 .elementor-element.elementor-element-da0ff6f {
+  display: none !important;
+}
+
+.vm-floating-call {
+  position: fixed;
+  right: calc(env(safe-area-inset-right) + 18px);
+  bottom: calc(env(safe-area-inset-bottom) + 18px);
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--vm-orange);
+  color: #fff !important;
+  text-decoration: none !important;
+  box-shadow: 0 16px 34px rgba(241, 90, 36, 0.34);
+}
+
+.vm-floating-call svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.vm-floating-call span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 .vm-hero-proof {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -577,6 +613,18 @@ body {
   .wd-header-mobile-nav .wd-tools-icon {
     width: 40px;
     height: 40px;
+  }
+
+  .vm-floating-call {
+    right: calc(env(safe-area-inset-right) + 14px);
+    bottom: calc(env(safe-area-inset-bottom) + 14px);
+    width: 54px;
+    height: 54px;
+  }
+
+  .vm-floating-call svg {
+    width: 24px;
+    height: 24px;
   }
 
   .elementor-3604 .elementor-element.elementor-element-8d1bf74 {
