@@ -96,17 +96,6 @@ document.addEventListener("submit", function (event) {
     hero.appendChild(card);
   }
 
-  function addStickyCta() {
-    if (document.querySelector(".vm-sticky-cta")) return;
-    var sticky = document.createElement("div");
-    sticky.className = "vm-sticky-cta";
-    sticky.innerHTML = [
-      '<a class="vm-sticky-cta__phone" href="tel:+375292051579">Позвонить</a>',
-      '<a class="vm-sticky-cta__primary" href="#form-field-field_197ba03">Заявка</a>'
-    ].join("");
-    document.body.appendChild(sticky);
-  }
-
   function addMobileHeaderActions() {
     var header = document.querySelector(".whb-header");
     var mobileCenter = document.querySelector(".whb-mobile-center");
@@ -114,7 +103,7 @@ document.addEventListener("submit", function (event) {
 
     var actions = document.createElement("div");
     actions.className = "vm-mobile-header-actions";
-    actions.innerHTML = '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить">Звонок</a>';
+    actions.innerHTML = '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить +375 29 205-15-79">+375 29 205-15-79</a>';
     mobileCenter.appendChild(actions);
 
     if (!header.querySelector(".vm-mobile-trustbar")) {
@@ -123,11 +112,6 @@ document.addEventListener("submit", function (event) {
       trustbar.textContent = "Подача от 1 часа • 22-28 м • без выходных";
       header.appendChild(trustbar);
     }
-  }
-
-  function toggleStickyCta() {
-    var isScrolled = window.scrollY > 420;
-    document.body.classList.toggle("vm-scrolled", isScrolled);
   }
 
   function improvePrimaryActions() {
@@ -156,8 +140,5 @@ document.addEventListener("submit", function (event) {
     enhanceHomePage();
     improvePrimaryActions();
     addMobileHeaderActions();
-    addStickyCta();
-    toggleStickyCta();
-    window.addEventListener("scroll", toggleStickyCta, { passive: true });
   });
 })();

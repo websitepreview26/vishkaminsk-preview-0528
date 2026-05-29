@@ -259,8 +259,7 @@ body {
   font-size: 15px;
 }
 
-.vm-quick-order button,
-.vm-sticky-cta__primary {
+.vm-quick-order button {
   min-height: 48px;
   border: 0;
   border-radius: 8px;
@@ -477,44 +476,10 @@ body {
   font-size: 13px !important;
 }
 
-.vm-sticky-cta {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 80;
-  display: none;
-  gap: 10px;
-  align-items: center;
-  padding: 10px;
-  border: 1px solid rgba(8, 36, 72, 0.1);
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--vm-shadow);
-  backdrop-filter: blur(10px);
-}
-
-body.vm-scrolled .vm-sticky-cta {
-  display: flex;
-}
-
-.vm-sticky-cta a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: 8px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.vm-sticky-cta__phone {
-  color: var(--vm-blue);
-  background: var(--vm-soft);
-}
-
-.vm-sticky-cta__primary {
-  color: #fff !important;
+.scrollToTop,
+.wd-scroll,
+.wd-scroll-top {
+  display: none !important;
 }
 
 @media (max-width: 1024px) {
@@ -553,12 +518,12 @@ body.vm-scrolled .vm-sticky-cta {
   }
 
   .whb-mobile-left {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
     min-width: 0;
   }
 
   .whb-mobile-center {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     min-width: auto;
   }
 
@@ -567,14 +532,14 @@ body.vm-scrolled .vm-sticky-cta {
   }
 
   .site-logo img {
-    max-width: 142px !important;
+    max-width: 108px !important;
     max-height: 44px;
   }
 
   .vm-mobile-header-actions {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .vm-mobile-call {
@@ -582,15 +547,12 @@ body.vm-scrolled .vm-sticky-cta {
     align-items: center;
     justify-content: center;
     min-height: 38px;
-    padding: 0 13px;
-    border-radius: 8px;
-    background: var(--vm-orange);
-    color: #fff !important;
+    color: var(--vm-blue) !important;
     font-size: 13px;
     font-weight: 800;
     line-height: 1;
     text-decoration: none !important;
-    box-shadow: 0 10px 22px rgba(241, 90, 36, 0.22);
+    white-space: nowrap;
   }
 
   .vm-mobile-trustbar {
@@ -698,38 +660,15 @@ body.vm-scrolled .vm-sticky-cta {
     padding: 20px !important;
   }
 
-  .vm-sticky-cta {
-    right: 10px;
-    bottom: 10px;
-    left: 10px;
-    justify-content: stretch;
-  }
-
-  .vm-sticky-cta a {
-    flex: 1;
-    padding-right: 10px;
-    padding-left: 10px;
-    font-size: 14px;
-  }
 }
 
 @media (max-width: 360px) {
   .site-logo img {
-    max-width: 120px !important;
+    max-width: 88px !important;
   }
 
   .vm-mobile-call {
-    min-height: 36px;
-    width: 38px;
-    padding-right: 11px;
-    padding-left: 11px;
-    font-size: 0;
-  }
-
-  .vm-mobile-call::before {
-    content: "☎";
-    font-size: 17px;
-    line-height: 1;
+    font-size: 11px;
   }
 
   .vm-mobile-trustbar {
