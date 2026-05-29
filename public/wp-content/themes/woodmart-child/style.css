@@ -88,10 +88,6 @@ body {
   text-transform: none;
 }
 
-.wd-nav-main .menu-item-42069 {
-  display: none;
-}
-
 .wd-nav-main > li.current-menu-item > a,
 .wd-nav-main > li > a:hover {
   background: rgba(241, 90, 36, 0.1);
