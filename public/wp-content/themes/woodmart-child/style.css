@@ -600,7 +600,7 @@ body {
 
 .footer-container.vm-footer-enhanced .footer-sidebar {
   display: grid !important;
-  grid-template-columns: minmax(260px, 1.2fr) minmax(170px, 0.72fr) minmax(280px, 1fr) minmax(210px, 0.76fr);
+  grid-template-columns: minmax(300px, 1.25fr) minmax(180px, 0.72fr) minmax(230px, 0.8fr);
   gap: 34px;
   align-items: start;
   margin: 0 !important;
@@ -611,6 +611,10 @@ body {
   width: auto !important;
   max-width: none !important;
   padding: 0 !important;
+}
+
+.footer-container.vm-footer-enhanced .footer-column-3 {
+  display: none;
 }
 
 .footer-container.vm-footer-enhanced .elementor-widget-wrap,
@@ -693,54 +697,6 @@ body {
 .footer-container.vm-footer-enhanced .menu a:hover,
 .footer-container.vm-footer-enhanced .menu .current-menu-item > a {
   color: #fff !important;
-}
-
-.vm-footer-cta {
-  padding: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.vm-footer-cta__label {
-  margin-bottom: 10px;
-  color: var(--vm-orange);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.vm-footer-cta__phone {
-  display: inline-flex;
-  margin-bottom: 10px;
-  color: #fff !important;
-  font-size: 23px;
-  font-weight: 800;
-  line-height: 1.15;
-  text-decoration: none !important;
-}
-
-.vm-footer-cta p {
-  margin: 0 0 16px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.vm-footer-cta__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 18px;
-  border-radius: 8px;
-  background: var(--vm-orange);
-  color: #fff !important;
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none !important;
-  box-shadow: 0 14px 26px rgba(241, 90, 36, 0.22);
 }
 
 .vm-footer-meta {
@@ -1993,10 +1949,6 @@ body {
     gap: 28px;
   }
 
-  .footer-container.vm-footer-enhanced .footer-column-3 {
-    grid-column: auto;
-  }
-
   .footer-container.vm-footer-enhanced img {
     max-width: 190px !important;
   }
@@ -2009,14 +1961,6 @@ body {
   .footer-container.vm-footer-enhanced .menu {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px 18px;
-  }
-
-  .vm-footer-cta {
-    padding: 18px;
-  }
-
-  .vm-footer-cta__phone {
-    font-size: 21px;
   }
 
   .vm-footer-bottom {

@@ -157,13 +157,6 @@ document.addEventListener("submit", function (event) {
     });
   }
 
-  function getContactHref(scope) {
-    var link = scope.querySelector('a[href$="contact-us/index.html"], a[href="../contact-us/index.html"]');
-    if (link) return link.getAttribute("href");
-    var isHome = window.location.pathname === "/" || /\/public\/index\.html$/.test(window.location.pathname);
-    return isHome ? "./contact-us/index.html" : "../contact-us/index.html";
-  }
-
   function enhanceFooter() {
     document.querySelectorAll(".footer-container").forEach(function (footer) {
       if (footer.classList.contains("vm-footer-enhanced")) return;
@@ -172,9 +165,7 @@ document.addEventListener("submit", function (event) {
       var main = footer.querySelector(".main-footer");
       var firstColumn = footer.querySelector(".footer-column-1");
       var secondColumn = footer.querySelector(".footer-column-2");
-      var thirdColumn = footer.querySelector(".footer-column-3");
       var fourthColumn = footer.querySelector(".footer-column-4");
-      var contactHref = getContactHref(footer);
 
       if (firstColumn && !firstColumn.querySelector(".vm-footer-copy")) {
         var copy = document.createElement("p");
@@ -185,17 +176,6 @@ document.addEventListener("submit", function (event) {
 
       var title = secondColumn ? secondColumn.querySelector(".widget-title") : null;
       if (title) title.textContent = "Навигация";
-
-      if (thirdColumn) {
-        thirdColumn.innerHTML = [
-          '<div class="vm-footer-cta">',
-          '<div class="vm-footer-cta__label">Быстрая заявка</div>',
-          '<a class="vm-footer-cta__phone" href="tel:+375292051579">+375 29 205-15-79</a>',
-          '<p>Подберём высоту, время подачи и ориентир по стоимости.</p>',
-          '<a class="vm-footer-cta__button" href="' + contactHref + '">Оставить заявку</a>',
-          '</div>'
-        ].join("");
-      }
 
       if (fourthColumn) {
         fourthColumn.innerHTML = [
