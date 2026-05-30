@@ -1854,12 +1854,12 @@ body {
   .vm-home-mobile-cta {
     display: block;
     box-sizing: border-box;
-    width: calc(100% - 24px);
-    margin: 24px auto 0;
+    width: 100%;
+    margin: 2px 0 0;
     padding: 24px 20px;
     border-radius: 16px;
     background: var(--vm-blue);
-    box-shadow: 0 20px 52px rgba(8, 36, 72, 0.18);
+    box-shadow: none;
   }
 
   .vm-home-mobile-cta h2 {
@@ -1910,6 +1910,7 @@ body {
 
   .vm-hero-proof {
     order: 5;
+    margin-top: 2px;
   }
 
   .elementor-3604 .elementor-element.elementor-element-d81488f,

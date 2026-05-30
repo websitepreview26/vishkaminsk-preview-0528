@@ -104,7 +104,7 @@ document.addEventListener("submit", function (event) {
       '<a class="vm-home-mobile-cta__phone" href="tel:+375292051579">+375 29 205-15-79</a>',
       '<a class="vm-home-mobile-cta__button" href="tel:+375292051579">Позвонить</a>'
     ].join("");
-    hero.parentNode.insertBefore(mobileCta, hero.nextSibling);
+    hero.insertBefore(mobileCta, proof);
   }
 
   function addMobileHeaderActions() {
