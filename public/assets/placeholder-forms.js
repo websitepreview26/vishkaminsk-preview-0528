@@ -165,7 +165,6 @@ document.addEventListener("submit", function (event) {
       var main = footer.querySelector(".main-footer");
       var firstColumn = footer.querySelector(".footer-column-1");
       var secondColumn = footer.querySelector(".footer-column-2");
-      var fourthColumn = footer.querySelector(".footer-column-4");
 
       if (firstColumn && !firstColumn.querySelector(".vm-footer-copy")) {
         var copy = document.createElement("p");
@@ -176,17 +175,6 @@ document.addEventListener("submit", function (event) {
 
       var title = secondColumn ? secondColumn.querySelector(".widget-title") : null;
       if (title) title.textContent = "Навигация";
-
-      if (fourthColumn) {
-        fourthColumn.innerHTML = [
-          '<div class="vm-footer-meta">',
-          '<h5>Условия</h5>',
-          '<span>Минск и область</span>',
-          '<span>Подача от 1 часа</span>',
-          '<span>Работаем без выходных</span>',
-          '</div>'
-        ].join("");
-      }
 
       if (main && !main.querySelector(".vm-footer-bottom")) {
         var bottom = document.createElement("div");
