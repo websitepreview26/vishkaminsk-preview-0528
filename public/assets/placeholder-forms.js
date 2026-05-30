@@ -98,11 +98,11 @@ document.addEventListener("submit", function (event) {
     var mobileCta = document.createElement("section");
     mobileCta.className = "vm-home-mobile-cta";
     mobileCta.innerHTML = [
-      '<div class="vm-section-kicker">Нужна автовышка?</div>',
-      "<h2>Расскажите, что нужно сделать</h2>",
-      "<p>Подскажем подходящую технику, время подачи и ориентир по стоимости.</p>",
+      '<div class="vm-section-kicker">Подача от 1 часа</div>',
+      "<h2>Нужна техника на объект?</h2>",
+      "<p>Позвоните: сразу уточним детали и сориентируем по свободным машинам.</p>",
       '<a class="vm-home-mobile-cta__phone" href="tel:+375292051579">+375 29 205-15-79</a>',
-      '<a class="vm-home-mobile-cta__button" href="tel:+375292051579">Позвонить</a>'
+      '<a class="vm-home-mobile-cta__button" href="tel:+375292051579">Позвонить сейчас</a>'
     ].join("");
     hero.insertBefore(mobileCta, proof);
   }

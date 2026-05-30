@@ -2035,34 +2035,34 @@ html {
     box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding: 16px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
+    padding: 22px 20px;
+    border: 1px solid rgba(8, 36, 72, 0.08);
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 16px 36px rgba(8, 36, 72, 0.12);
   }
 
   .vm-home-mobile-cta h2 {
     margin: 0;
-    color: #fff;
-    font-size: 26px;
+    color: var(--vm-blue);
+    font-size: 30px;
     font-weight: 800;
     line-height: 1.04;
     letter-spacing: -0.045em;
   }
 
   .vm-home-mobile-cta p {
-    margin: 10px 0 0;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 14px;
-    line-height: 1.4;
+    margin: 14px 0 0;
+    color: var(--vm-muted);
+    font-size: 15px;
+    line-height: 1.45;
   }
 
   .vm-home-mobile-cta__phone {
     display: block;
-    margin-top: 16px;
-    color: #fff !important;
-    font-size: 20px;
+    margin-top: 20px;
+    color: var(--vm-blue) !important;
+    font-size: 22px;
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
@@ -2072,11 +2072,11 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    margin-top: 12px;
+    min-height: 48px;
+    margin-top: 14px;
     border-radius: 8px;
-    background: #fff;
-    color: var(--vm-blue) !important;
+    background: var(--vm-orange);
+    color: #fff !important;
     font-size: 15px;
     font-weight: 800;
     text-decoration: none !important;
