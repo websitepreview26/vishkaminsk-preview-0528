@@ -1004,13 +1004,18 @@ body {
   transform: translateY(-50%) rotate(45deg);
 }
 
-.mobile-nav .wd-nav-mobile > li:is(.current-menu-item, .current_page_item) > a,
-.mobile-nav .wd-nav-mobile > li > a:hover,
-.mobile-nav .wd-nav-mobile > li > a:focus {
+.mobile-nav .wd-nav-mobile > li:is(.current-menu-item, .current_page_item) > a {
   border-color: rgba(241, 90, 36, 0.22);
   background: #fff4ef;
   color: var(--vm-blue);
-  box-shadow: inset 4px 0 0 var(--vm-orange);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .mobile-nav .wd-nav-mobile > li > a:hover {
+    border-color: rgba(241, 90, 36, 0.22);
+    background: #fff4ef;
+    color: var(--vm-blue);
+  }
 }
 
 .mobile-nav .wd-nav-mobile .nav-link-text {
