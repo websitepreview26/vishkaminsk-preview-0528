@@ -1303,6 +1303,108 @@ body {
   display: none !important;
 }
 
+.elementor-3604 .elementor-element.elementor-element-d81488f,
+.elementor-3604 .elementor-element.elementor-element-2226661,
+.elementor-3604 .elementor-element.elementor-element-e3e5361,
+.elementor-3604 .elementor-element.elementor-element-f00cb73,
+.elementor-3604 .elementor-element.elementor-element-ec6e9af {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#services,
+#avtopark,
+#reviews,
+#contacts {
+  scroll-margin-top: 112px;
+}
+
+.vm-home-landing {
+  display: grid;
+  gap: 74px;
+  padding: 88px 0 22px;
+  background: #f5f7f9;
+}
+
+.vm-home-services,
+.vm-home-landing > .vm-services-cta {
+  width: min(1180px, calc(100vw - 40px));
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.vm-home-services h2,
+.vm-home-services h3,
+.vm-home-services p,
+.vm-home-contacts__call h2,
+.vm-home-contacts__call p {
+  margin: 0;
+}
+
+.vm-home-services h2,
+.vm-home-contacts__call h2 {
+  color: var(--vm-blue);
+  font-size: clamp(34px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.vm-home-services .vm-services-heading p {
+  margin-top: 16px;
+}
+
+.vm-home-fleet {
+  padding: 0 0 74px;
+}
+
+.elementor-3604 .elementor-element.elementor-element-2714c18 {
+  padding-top: 74px;
+  padding-bottom: 34px;
+}
+
+.elementor-3604 .elementor-element.elementor-element-2714c18 .reviews-full {
+  padding-top: 36px;
+  padding-bottom: 40px;
+}
+
+.vm-home-contacts {
+  padding-top: 40px;
+  padding-bottom: 88px;
+}
+
+.vm-home-contacts__call {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 42px;
+  border: 1px solid rgba(8, 36, 72, 0.08);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 16px 46px rgba(8, 36, 72, 0.07);
+}
+
+.vm-home-contacts__call p {
+  margin-top: 16px;
+  color: var(--vm-muted);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.vm-home-contacts__call .vm-services-cta__phone {
+  margin-top: 30px;
+  color: var(--vm-blue) !important;
+  font-size: 26px;
+}
+
+.vm-home-contacts__call .vm-services-button {
+  margin-top: 18px;
+}
+
 @media (max-width: 1024px) {
   .vm-services {
     gap: 68px;
@@ -1338,6 +1440,61 @@ body {
 }
 
 @media (max-width: 768px) {
+  #services,
+  #avtopark,
+  #reviews,
+  #contacts {
+    scroll-margin-top: 78px;
+  }
+
+  .vm-home-landing {
+    gap: 52px;
+    padding: 58px 0 12px;
+  }
+
+  .vm-home-services,
+  .vm-home-landing > .vm-services-cta {
+    width: calc(100vw - 24px);
+  }
+
+  .vm-home-services h2,
+  .vm-home-contacts__call h2 {
+    font-size: 34px;
+  }
+
+  .vm-home-fleet {
+    padding-bottom: 48px;
+  }
+
+  .elementor-3604 .elementor-element.elementor-element-2714c18 {
+    padding-top: 48px;
+    padding-bottom: 20px;
+  }
+
+  .elementor-3604 .elementor-element.elementor-element-2714c18 .reviews-full {
+    padding-top: 22px;
+    padding-bottom: 28px;
+  }
+
+  .vm-home-contacts {
+    padding-top: 28px;
+    padding-bottom: 58px;
+  }
+
+  .vm-home-contacts__call {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .vm-home-contacts__call p {
+    font-size: 15px;
+  }
+
+  .vm-home-contacts__call .vm-services-cta__phone {
+    margin-top: 24px;
+    font-size: 22px;
+  }
+
   .page-id-41003 .page-title {
     min-height: 126px;
   }

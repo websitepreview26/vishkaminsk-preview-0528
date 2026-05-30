@@ -196,6 +196,30 @@ document.addEventListener("submit", function (event) {
     });
   }
 
+  function enableLandingNavigation() {
+    document.addEventListener("click", function (event) {
+      var anchor = event.target.closest('a[href^="#"]');
+      if (!anchor) return;
+
+      var selector = anchor.getAttribute("href");
+      if (!/^#(services|avtopark|reviews|contacts)$/.test(selector)) return;
+
+      var target = document.querySelector(selector);
+      if (!target) return;
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      var mobileNav = anchor.closest(".mobile-nav");
+      var closeSide = document.querySelector(".wd-close-side");
+      if (mobileNav && closeSide) {
+        window.setTimeout(function () {
+          closeSide.click();
+        }, 0);
+      }
+    });
+  }
+
   ready(function () {
     enhanceHomePage();
     improvePrimaryActions();
@@ -203,5 +227,6 @@ document.addEventListener("submit", function (event) {
     addDesktopHeaderPhone();
     addMobileHeaderActions();
     addFloatingCall();
+    enableLandingNavigation();
   });
 })();
