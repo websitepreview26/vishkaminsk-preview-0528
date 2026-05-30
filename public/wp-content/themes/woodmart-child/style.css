@@ -133,6 +133,11 @@ body {
   object-fit: contain;
 }
 
+.site-logo img[src*="vishka-header-compact.png"] {
+  max-width: 82px !important;
+  max-height: 76px !important;
+}
+
 .wd-header-main-nav {
   min-width: 0;
 }
@@ -1818,6 +1823,11 @@ html {
   .site-logo img {
     max-width: 108px !important;
     max-height: 44px;
+  }
+
+  .site-logo img[src*="vishka-header-compact.png"] {
+    max-width: 66px !important;
+    max-height: 62px !important;
   }
 
   .vm-mobile-header-actions {

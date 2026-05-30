@@ -119,6 +119,20 @@ document.addEventListener("submit", function (event) {
 
   }
 
+  function useCompactHeaderLogo() {
+    document.querySelectorAll(".site-logo img").forEach(function (image) {
+      var source = image.getAttribute("src") || "";
+      if (!/logo(?:123|2)\.png$/.test(source)) return;
+
+      image.src = source.replace(/logo(?:123|2)\.png$/, "vishka-header-compact.png");
+      image.removeAttribute("srcset");
+      image.removeAttribute("sizes");
+      image.width = 427;
+      image.height = 429;
+      image.alt = "Аренда автовышек";
+    });
+  }
+
   function addDesktopHeaderPhone() {
     var headerRight = Array.prototype.find.call(
       document.querySelectorAll(".whb-general-header .whb-col-right.whb-visible-lg"),
@@ -224,6 +238,7 @@ document.addEventListener("submit", function (event) {
     enhanceHomePage();
     improvePrimaryActions();
     enhanceFooter();
+    useCompactHeaderLogo();
     addDesktopHeaderPhone();
     addMobileHeaderActions();
     addFloatingCall();
