@@ -598,16 +598,8 @@ body {
   height: auto;
 }
 
-.footer-container.vm-footer-enhanced .elementor-element-a995903 a {
-  display: inline-flex;
-  max-width: 100%;
-  padding: 8px 10px;
-  border-radius: 10px;
-  background: #fff;
-}
-
 .footer-container.vm-footer-enhanced .elementor-element-a995903 img {
-  width: 280px;
+  width: 112px;
   max-width: 100% !important;
 }
 
