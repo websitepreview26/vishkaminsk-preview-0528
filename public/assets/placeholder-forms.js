@@ -98,7 +98,6 @@ document.addEventListener("submit", function (event) {
     var mobileCta = document.createElement("section");
     mobileCta.className = "vm-home-mobile-cta";
     mobileCta.innerHTML = [
-      '<div class="vm-section-kicker">Подача от 1 часа</div>',
       "<h2>Нужна техника на объект?</h2>",
       "<p>Позвоните: сразу уточним детали и сориентируем по свободным машинам.</p>",
       '<a class="vm-home-mobile-cta__phone" href="tel:+375292051579">+375 29 205-15-79</a>',
