@@ -1805,6 +1805,7 @@ html {
   }
 
   .whb-general-header-inner {
+    position: relative;
     gap: 8px;
     min-height: 64px;
     padding-right: 10px;
@@ -1817,8 +1818,10 @@ html {
   }
 
   .whb-mobile-center {
-    flex: 1 1 auto;
+    position: absolute;
+    left: 50%;
     min-width: auto;
+    transform: translateX(-50%);
   }
 
   .whb-mobile-right {
