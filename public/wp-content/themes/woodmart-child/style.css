@@ -595,8 +595,8 @@ body {
 }
 
 .footer-container.vm-footer-enhanced .elementor-element-a995903 img {
-  width: 112px;
-  max-width: 100% !important;
+  width: 112px !important;
+  max-width: 112px !important;
 }
 
 .vm-footer-copy {
