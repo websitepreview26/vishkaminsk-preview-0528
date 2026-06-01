@@ -1747,10 +1747,18 @@ html {
   }
 }
 
+@media (min-width: 1025px) {
+  .whb-general-header > .container {
+    width: min(1180px, calc(100vw - 40px));
+    max-width: 1180px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
 @media (min-width: 1025px) and (max-width: 1360px) {
   .whb-general-header > .container {
-    padding-right: 18px;
-    padding-left: 18px;
+    width: calc(100vw - 36px);
   }
 
   .whb-general-header-inner {
