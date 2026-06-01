@@ -1819,9 +1819,10 @@ html {
 
   .whb-mobile-center {
     position: absolute;
+    top: 50%;
     left: 50%;
     min-width: auto;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
   }
 
   .whb-mobile-right {
