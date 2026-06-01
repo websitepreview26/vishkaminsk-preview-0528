@@ -2134,6 +2134,11 @@ html {
     max-width: 190px !important;
   }
 
+  .footer-container.vm-footer-enhanced .elementor-element-a995903 img {
+    width: 96px !important;
+    max-width: 96px !important;
+  }
+
   .vm-footer-copy {
     max-width: 100%;
     margin-bottom: 16px;
