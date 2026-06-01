@@ -250,11 +250,7 @@ body {
 }
 
 .elementor-3604 .elementor-element.elementor-element-c58ff0f {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  width: 100%;
-  margin-top: 8px;
+  display: none !important;
 }
 
 .elementor-3604 .elementor-element.elementor-element-c58ff0f .wd-button-wrapper {
@@ -307,7 +303,7 @@ body {
   flex-wrap: wrap;
   gap: 10px;
   max-width: 720px;
-  margin-top: 4px;
+  margin-top: 18px;
 }
 
 .vm-proof-item {
