@@ -1787,7 +1787,22 @@ html {
   .vm-work-gallery__item,
   .vm-work-gallery__item--main {
     grid-row: auto;
+    height: auto;
+  }
+
+  .vm-work-gallery__item img {
+    display: block;
     height: 240px;
+  }
+
+  .vm-work-gallery__item span {
+    position: static;
+    display: block;
+    padding: 13px 15px;
+    border-radius: 0;
+    background: var(--vm-blue);
+    font-size: 15px;
+    backdrop-filter: none;
   }
 
   .vm-fleet-cta {
