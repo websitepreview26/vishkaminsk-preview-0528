@@ -53,7 +53,7 @@ document.addEventListener("submit", function (event) {
     var proof = document.createElement("div");
     proof.className = "vm-hero-proof";
     proof.innerHTML = [
-      '<div class="vm-proof-item"><strong>Подача от 1 часа</strong></div>',
+      '<div class="vm-proof-item"><strong>Быстрая подача: до 1 часа</strong></div>',
       '<div class="vm-proof-item"><strong>22-28 м</strong></div>',
       '<div class="vm-proof-item"><strong>Без выходных</strong></div>'
     ].join("");
@@ -75,6 +75,7 @@ document.addEventListener("submit", function (event) {
 
     var select = document.createElement("select");
     select.name = "height";
+    select.setAttribute("aria-label", "Высота автовышки");
     select.innerHTML = [
       '<option value="">Высота автовышки</option>',
       '<option value="22">22 метра</option>',
@@ -171,7 +172,7 @@ document.addEventListener("submit", function (event) {
       if (firstColumn && !firstColumn.querySelector(".vm-footer-copy")) {
         var copy = document.createElement("p");
         copy.className = "vm-footer-copy";
-        copy.textContent = "Автовышки 22–28 м для фасадных, монтажных и коммунальных работ. Подача по Минску и области от 1 часа.";
+        copy.textContent = "Автовышки 22–28 м для фасадных, монтажных и коммунальных работ. Подача по Минску и области до 1 часа.";
         firstColumn.appendChild(copy);
       }
 

@@ -348,6 +348,12 @@ body {
   white-space: nowrap;
 }
 
+@media (min-width: 769px) {
+  .vm-floating-call {
+    display: none;
+  }
+}
+
 .vm-hero-proof {
   display: flex;
   flex-wrap: wrap;
