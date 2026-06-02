@@ -673,6 +673,7 @@ body {
 
 .footer-container.vm-footer-enhanced .elementor-social-icons-wrapper {
   display: flex;
+  justify-content: flex-start !important;
   gap: 10px;
   margin-top: 16px;
 }
