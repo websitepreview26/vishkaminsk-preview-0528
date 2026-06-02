@@ -105,8 +105,16 @@ body {
 }
 
 .whb-header {
-  z-index: 50;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 500;
   margin-bottom: 0 !important;
+}
+
+.main-page-wrapper {
+  padding-top: 78px !important;
 }
 
 .whb-top-bar {
@@ -1963,6 +1971,10 @@ html {
 }
 
 @media (max-width: 768px) {
+  .main-page-wrapper {
+    padding-top: 64px !important;
+  }
+
   .whb-top-bar {
     display: none;
   }
