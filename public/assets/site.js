@@ -181,7 +181,7 @@ document.addEventListener("submit", function (event) {
       if (main && !main.querySelector(".vm-footer-bottom")) {
         var bottom = document.createElement("div");
         bottom.className = "vm-footer-bottom";
-        bottom.innerHTML = '<span>© vishka.minsk.by</span><span>Аренда автовышек 22–28 м</span>';
+        bottom.innerHTML = '<span>© vyshka24.by</span><span>Аренда автовышек 22–28 м</span>';
         main.appendChild(bottom);
       }
     });
