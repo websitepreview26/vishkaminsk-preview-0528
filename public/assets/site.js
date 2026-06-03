@@ -53,10 +53,10 @@ document.addEventListener("submit", function (event) {
   }
 
   var data = new FormData(form);
-  var name = data.get("name") || data.get("form_fields[field_197ba03]") || "";
-  var email = data.get("email") || data.get("form_fields[field_9f6e13a]") || "";
-  var phone = data.get("phone") || data.get("form_fields[email]") || "";
-  var message = data.get("message") || data.get("form_fields[message]") || "";
+  var name = data.get("name") || "";
+  var email = data.get("email") || "";
+  var phone = data.get("phone") || "";
+  var message = data.get("message") || "";
   var height = data.get("height") || "";
 
   data.set("access_key", WEB3FORMS_ACCESS_KEY);
