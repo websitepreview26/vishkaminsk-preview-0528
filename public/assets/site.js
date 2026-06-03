@@ -150,23 +150,26 @@ document.addEventListener("submit", function (event) {
     });
   }
 
-  function formatBelarusPhone(value) {
-    var raw = value.trim();
-    if (!raw) return "";
-    if (/[A-Za-zА-Яа-яЁё]/.test(raw)) return value;
-
-    var digits = raw.replace(/\D/g, "");
-    if (!digits) return raw.charAt(0) === "+" ? "+" : "";
-
-    if (raw.charAt(0) === "+" && raw.indexOf("+375") !== 0) return value;
+  function getBelarusPhoneDigits(value) {
+    var digits = String(value || "").replace(/\D/g, "");
 
     if (digits.indexOf("375") === 0) {
       digits = digits.slice(3);
-    } else if (raw.charAt(0) === "+") {
-      return value;
+    } else if (digits.indexOf("80") === 0) {
+      digits = digits.slice(2);
+    } else if (digits.charAt(0) === "0") {
+      digits = digits.slice(1);
     }
 
-    if (digits.length > 9) return value;
+    return digits.slice(0, 9);
+  }
+
+  function formatBelarusPhone(value, keepPrefix) {
+    var raw = value.trim();
+    if (!raw) return keepPrefix ? "+375 " : "";
+
+    var digits = getBelarusPhoneDigits(raw);
+    if (!digits) return keepPrefix ? "+375 " : "";
 
     var code = digits.slice(0, 2);
     var first = digits.slice(2, 5);
@@ -190,20 +193,35 @@ document.addEventListener("submit", function (event) {
       input.removeAttribute("pattern");
       input.removeAttribute("title");
 
+      function validatePhone() {
+        var digits = getBelarusPhoneDigits(input.value);
+        input.setCustomValidity(!input.value || digits.length === 9 ? "" : "Введите номер в формате +375 29 605-11-00");
+      }
+
       input.addEventListener("focus", function () {
-        if (!input.value.trim()) input.value = "+375 ";
+        input.value = formatBelarusPhone(input.value, true);
+        validatePhone();
       });
 
       input.addEventListener("blur", function () {
-        if (/^\+375\s*$/.test(input.value)) input.value = "";
+        input.value = formatBelarusPhone(input.value, false);
+        validatePhone();
       });
 
       input.addEventListener("input", function () {
         var cursorAtEnd = input.selectionStart === input.value.length;
-        var formatted = formatBelarusPhone(input.value);
+        var formatted = formatBelarusPhone(input.value, document.activeElement === input);
         if (formatted !== input.value) input.value = formatted;
         if (cursorAtEnd) input.setSelectionRange(input.value.length, input.value.length);
+        validatePhone();
       });
+
+      input.addEventListener("invalid", function () {
+        if (input.validity.valueMissing) return;
+        input.setCustomValidity("Введите номер в формате +375 29 605-11-00");
+      });
+
+      input.addEventListener("change", validatePhone);
     });
   }
 
