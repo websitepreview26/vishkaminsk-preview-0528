@@ -110,12 +110,13 @@ document.addEventListener("submit", function (event) {
     }
   }
 
-  function buildInput(type, name, placeholder, required) {
+  function buildInput(type, name, placeholder, required, maxLength) {
     var input = document.createElement("input");
     input.type = type;
     input.name = name;
     input.placeholder = placeholder;
     if (required) input.required = true;
+    if (maxLength) input.maxLength = maxLength;
     return input;
   }
 
@@ -249,7 +250,7 @@ document.addEventListener("submit", function (event) {
     var form = document.createElement("form");
     form.setAttribute("data-static-placeholder", "true");
     form.action = "#";
-    form.appendChild(buildInput("text", "name", "Ваше имя", false));
+    form.appendChild(buildInput("text", "name", "Ваше имя", false, 30));
     form.appendChild(buildInput("tel", "phone", "+375 __ ___-__-__", true));
 
     var select = document.createElement("select");
