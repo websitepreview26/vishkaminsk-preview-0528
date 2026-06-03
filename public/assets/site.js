@@ -218,6 +218,7 @@ document.addEventListener("submit", function (event) {
     var overlay = document.querySelector(".wd-close-side");
     var scrollTop = document.querySelector(".scrollToTop");
     var closeButton = null;
+    var callLink = null;
 
     function closeNavigation() {
       if (nav) nav.classList.remove("wd-opened");
@@ -237,6 +238,16 @@ document.addEventListener("submit", function (event) {
         closeButton.setAttribute("aria-label", "Закрыть меню");
         closeButton.innerHTML = '<span aria-hidden="true"></span>';
         nav.insertBefore(closeButton, nav.firstChild);
+      }
+
+      callLink = nav.querySelector(".vm-mobile-nav-call");
+      if (!callLink) {
+        callLink = document.createElement("a");
+        callLink.className = "vm-mobile-nav-call";
+        callLink.href = "tel:+375292051579";
+        callLink.setAttribute("aria-label", "Позвонить +375 29 205-15-79");
+        callLink.innerHTML = "<strong>Автовышка в Минске и области</strong><span>+375 29 205-15-79</span>";
+        nav.appendChild(callLink);
       }
 
       opener.addEventListener("click", function (event) {

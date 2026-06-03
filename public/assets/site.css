@@ -2129,8 +2129,7 @@ html {
   line-height: 1;
 }
 
-.mobile-nav.wd-side-hidden-nav::after {
-  content: "Автовышка в Минске и области \A +375 29 205-15-79";
+.vm-mobile-nav-call {
   display: block;
   margin-top: auto;
   padding: 17px 18px;
@@ -2141,8 +2140,21 @@ html {
   font-size: 13px;
   font-weight: 800;
   line-height: 1.45;
-  white-space: pre-line;
+  text-decoration: none !important;
   box-shadow: 0 12px 26px rgba(8, 36, 72, 0.07);
+}
+
+.vm-mobile-nav-call strong,
+.vm-mobile-nav-call span {
+  display: block;
+}
+
+.vm-mobile-nav-call span {
+  color: inherit;
+}
+
+.vm-mobile-nav-call:active {
+  transform: translateY(1px);
 }
 
 .mobile-nav .wd-nav-mobile.wd-active {
