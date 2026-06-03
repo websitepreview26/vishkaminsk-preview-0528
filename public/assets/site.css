@@ -2072,6 +2072,50 @@ html {
   box-shadow: -18px 0 44px rgba(8, 36, 72, 0.14);
 }
 
+.vm-mobile-nav-close {
+  position: absolute;
+  top: calc(env(safe-area-inset-top) + 20px);
+  right: 18px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid rgba(8, 36, 72, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--vm-blue);
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(8, 36, 72, 0.08);
+}
+
+.vm-mobile-nav-close span,
+.vm-mobile-nav-close span::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.vm-mobile-nav-close span {
+  transform: rotate(45deg);
+}
+
+.vm-mobile-nav-close span::before {
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.vm-mobile-nav-close:focus-visible {
+  outline: 2px solid var(--vm-orange);
+  outline-offset: 2px;
+}
+
 .mobile-nav.wd-side-hidden-nav::before {
   content: "Меню";
   display: flex;

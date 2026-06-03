@@ -217,18 +217,36 @@ document.addEventListener("submit", function (event) {
     var nav = document.querySelector(".mobile-nav");
     var overlay = document.querySelector(".wd-close-side");
     var scrollTop = document.querySelector(".scrollToTop");
+    var closeButton = null;
 
     function closeNavigation() {
       if (nav) nav.classList.remove("wd-opened");
       if (overlay) overlay.classList.remove("wd-close-side-opened");
+      if (opener) {
+        var openerLink = opener.querySelector("a");
+        if (openerLink) openerLink.setAttribute("aria-expanded", "false");
+      }
     }
 
     if (opener && nav && overlay) {
+      closeButton = nav.querySelector(".vm-mobile-nav-close");
+      if (!closeButton) {
+        closeButton = document.createElement("button");
+        closeButton.type = "button";
+        closeButton.className = "vm-mobile-nav-close";
+        closeButton.setAttribute("aria-label", "Закрыть меню");
+        closeButton.innerHTML = '<span aria-hidden="true"></span>';
+        nav.insertBefore(closeButton, nav.firstChild);
+      }
+
       opener.addEventListener("click", function (event) {
         event.preventDefault();
         nav.classList.add("wd-opened");
         overlay.classList.add("wd-close-side-opened");
+        var openerLink = opener.querySelector("a");
+        if (openerLink) openerLink.setAttribute("aria-expanded", "true");
       });
+      closeButton.addEventListener("click", closeNavigation);
       overlay.addEventListener("click", closeNavigation);
       document.addEventListener("click", function (event) {
         if (event.target.closest(".wd-close-side")) closeNavigation();
