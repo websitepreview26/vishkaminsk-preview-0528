@@ -150,6 +150,63 @@ document.addEventListener("submit", function (event) {
     });
   }
 
+  function formatBelarusPhone(value) {
+    var raw = value.trim();
+    if (!raw) return "";
+    if (/[A-Za-zА-Яа-яЁё]/.test(raw)) return value;
+
+    var digits = raw.replace(/\D/g, "");
+    if (!digits) return raw.charAt(0) === "+" ? "+" : "";
+
+    if (raw.charAt(0) === "+" && raw.indexOf("+375") !== 0) return value;
+
+    if (digits.indexOf("375") === 0) {
+      digits = digits.slice(3);
+    } else if (raw.charAt(0) === "+") {
+      return value;
+    }
+
+    if (digits.length > 9) return value;
+
+    var code = digits.slice(0, 2);
+    var first = digits.slice(2, 5);
+    var second = digits.slice(5, 7);
+    var third = digits.slice(7, 9);
+    var formatted = "+375";
+
+    if (code) formatted += " " + code;
+    if (first) formatted += " " + first;
+    if (second) formatted += "-" + second;
+    if (third) formatted += "-" + third;
+
+    return formatted;
+  }
+
+  function preparePhoneInputs() {
+    document.querySelectorAll('input[type="tel"]').forEach(function (input) {
+      input.placeholder = "+375 __ ___-__-__";
+      input.inputMode = "tel";
+      input.autocomplete = "tel";
+      input.removeAttribute("pattern");
+      input.removeAttribute("title");
+
+      input.addEventListener("focus", function () {
+        if (!input.value.trim()) input.value = "+375 ";
+      });
+
+      input.addEventListener("blur", function () {
+        if (/^\+375\s*$/.test(input.value)) input.value = "";
+      });
+
+      input.addEventListener("input", function () {
+        var cursorAtEnd = input.selectionStart === input.value.length;
+        var formatted = formatBelarusPhone(input.value);
+        if (formatted !== input.value) input.value = formatted;
+        if (cursorAtEnd) input.setSelectionRange(input.value.length, input.value.length);
+      });
+    });
+  }
+
   function enhanceHomePage() {
     var hero = document.querySelector(".elementor-3604 .elementor-element-8d1bf74 > .e-con-inner");
     if (!hero || hero.querySelector(".vm-quick-order")) return;
@@ -388,6 +445,7 @@ document.addEventListener("submit", function (event) {
   ready(function () {
     enhanceHomePage();
     prepareLeadForms();
+    preparePhoneInputs();
     improvePrimaryActions();
     enhanceFooter();
     addDesktopHeaderPhone();
