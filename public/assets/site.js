@@ -211,7 +211,7 @@ document.addEventListener("submit", function (event) {
 
       input.addEventListener("input", function () {
         var cursorAtEnd = input.selectionStart === input.value.length;
-        var formatted = formatBelarusPhone(input.value, document.activeElement === input);
+        var formatted = formatBelarusPhone(input.value, false);
         if (formatted !== input.value) input.value = formatted;
         if (cursorAtEnd) input.setSelectionRange(input.value.length, input.value.length);
         validatePhone();
