@@ -1,31 +1,104 @@
 
+var WEB3FORMS_ACCESS_KEY = "76986f8c-be83-480a-a5c9-7eb7a318ba20";
+var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+
 document.addEventListener("submit", function (event) {
   var form = event.target;
   if (!(form instanceof HTMLFormElement)) return;
   event.preventDefault();
   event.stopImmediatePropagation();
+
+  if (form.getAttribute("data-submitting") === "true") return;
+  form.setAttribute("data-submitting", "true");
+
   var button = form.querySelector('button[type="submit"], input[type="submit"]');
-  var original = button ? (button.textContent || button.value) : "";
+  var buttonLabel = button ? button.querySelector(".elementor-button-text, .wd-btn-text") : null;
+  var original = button ? ((buttonLabel ? buttonLabel.textContent : button.textContent) || button.value) : "";
+
+  function setButtonText(text) {
+    if (!button) return;
+    if (button.tagName === "INPUT") {
+      button.value = text;
+    } else if (buttonLabel) {
+      buttonLabel.textContent = text;
+    } else {
+      button.textContent = text;
+    }
+  }
+
+  function showNote(text, type) {
+    var note = form.querySelector(".static-form-note");
+    if (!note) {
+      note = document.createElement("div");
+      note.className = "static-form-note";
+      form.appendChild(note);
+    }
+
+    var isError = type === "error";
+    note.style.cssText = [
+      "margin-top:12px",
+      "padding:12px 16px",
+      "border-radius:8px",
+      "background:" + (isError ? "#fff1f1" : "#eef8f0"),
+      "color:" + (isError ? "#9b1c1c" : "#14612a"),
+      "font-weight:600",
+      "line-height:1.35"
+    ].join(";");
+    note.textContent = text;
+  }
+
   if (button) {
-    if ("value" in button) button.value = "Заявка принята";
-    button.textContent = "Заявка принята";
+    setButtonText("Отправляем...");
     button.disabled = true;
   }
-  var note = form.querySelector(".static-form-note");
-  if (!note) {
-    note = document.createElement("div");
-    note.className = "static-form-note";
-    note.style.cssText = "margin-top:12px;padding:12px 16px;border-radius:8px;background:#eef8f0;color:#14612a;font-weight:600;";
-    form.appendChild(note);
-  }
-  note.textContent = "Это демо-заглушка: данные пока никуда не отправляются.";
-  window.setTimeout(function () {
-    if (button) {
-      if ("value" in button) button.value = original || "Отправить";
-      button.textContent = original || "Отправить";
-      button.disabled = false;
+
+  var data = new FormData(form);
+  var name = data.get("name") || data.get("form_fields[field_197ba03]") || "";
+  var email = data.get("email") || data.get("form_fields[field_9f6e13a]") || "";
+  var phone = data.get("phone") || data.get("form_fields[email]") || "";
+  var message = data.get("message") || data.get("form_fields[message]") || "";
+  var height = data.get("height") || "";
+
+  data.set("access_key", WEB3FORMS_ACCESS_KEY);
+  data.set("subject", "Новая заявка с vyshka24.by");
+  data.set("from_name", "vyshka24.by");
+  data.set("botcheck", data.get("botcheck") || "");
+  if (name) data.set("name", name);
+  if (email) data.set("email", email);
+  if (phone) data.set("phone", phone);
+  if (message) data.set("message", message);
+  if (height) data.set("height", height);
+  data.set("Имя", name || "Не указано");
+  data.set("Телефон", phone || "Не указан");
+  if (email) data.set("Email", email);
+  if (height) data.set("Высота", height);
+  if (message) data.set("Сообщение", message);
+
+  fetch(WEB3FORMS_ENDPOINT, {
+    method: "POST",
+    body: data,
+    headers: {
+      Accept: "application/json"
     }
-  }, 2500);
+  }).then(function (response) {
+    return response.json().then(function (result) {
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Не удалось отправить заявку.");
+      }
+      showNote("Заявка отправлена. Мы скоро свяжемся с вами.", "success");
+      form.reset();
+      setButtonText("Заявка отправлена");
+      window.setTimeout(function () {
+        setButtonText(original || "Отправить");
+      }, 2500);
+    });
+  }).catch(function () {
+    showNote("Не удалось отправить заявку. Пожалуйста, позвоните нам: +375 29 205-15-79.", "error");
+    setButtonText(original || "Отправить");
+  }).finally(function () {
+    form.removeAttribute("data-submitting");
+    if (button) button.disabled = false;
+  });
 }, true);
 
 (function () {
@@ -44,6 +117,37 @@ document.addEventListener("submit", function (event) {
     input.placeholder = placeholder;
     if (required) input.required = true;
     return input;
+  }
+
+  function addHiddenInput(form, name, value) {
+    var input = form.querySelector('input[name="' + name + '"]');
+    if (!input) {
+      input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      form.appendChild(input);
+    }
+    input.value = value || "";
+    return input;
+  }
+
+  function prepareLeadForms() {
+    document.querySelectorAll("form").forEach(function (form) {
+      form.action = WEB3FORMS_ENDPOINT;
+      form.method = "POST";
+      addHiddenInput(form, "access_key", WEB3FORMS_ACCESS_KEY);
+      addHiddenInput(form, "subject", "Новая заявка с vyshka24.by");
+      addHiddenInput(form, "from_name", "vyshka24.by");
+
+      var botcheck = form.querySelector('input[name="botcheck"]');
+      if (!botcheck) {
+        botcheck = addHiddenInput(form, "botcheck", "");
+        botcheck.setAttribute("tabindex", "-1");
+        botcheck.setAttribute("autocomplete", "off");
+        botcheck.setAttribute("aria-hidden", "true");
+        botcheck.style.display = "none";
+      }
+    });
   }
 
   function enhanceHomePage() {
@@ -283,6 +387,7 @@ document.addEventListener("submit", function (event) {
 
   ready(function () {
     enhanceHomePage();
+    prepareLeadForms();
     improvePrimaryActions();
     enhanceFooter();
     addDesktopHeaderPhone();
