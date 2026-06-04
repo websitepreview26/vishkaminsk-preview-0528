@@ -248,7 +248,7 @@ document.addEventListener("submit", function (event) {
 
   function preparePhoneInputs() {
     document.querySelectorAll('input[type="tel"]').forEach(function (input) {
-      input.placeholder = "__ ___-__-__";
+      input.placeholder = "";
       input.inputMode = "tel";
       input.autocomplete = "tel";
       input.removeAttribute("pattern");
