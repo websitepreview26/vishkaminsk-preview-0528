@@ -370,6 +370,141 @@ document.addEventListener("submit", function (event) {
     hero.insertBefore(mobileCta, proof);
   }
 
+  function createLeadModal() {
+    if (document.querySelector(".vm-lead-modal")) return;
+
+    var modal = document.createElement("div");
+    var dialog = document.createElement("div");
+    var close = document.createElement("button");
+    var form = document.createElement("form");
+    var select = document.createElement("select");
+    var button = document.createElement("button");
+
+    modal.className = "vm-lead-modal";
+    modal.setAttribute("aria-hidden", "true");
+    dialog.className = "vm-lead-modal__dialog";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "vm-lead-modal-title");
+
+    close.type = "button";
+    close.className = "vm-lead-modal__close";
+    close.setAttribute("aria-label", "Закрыть");
+    close.innerHTML = '<span aria-hidden="true"></span>';
+
+    form.className = "vm-lead-modal__form";
+    form.action = "#";
+    form.innerHTML = [
+      '<div class="vm-lead-modal__eyebrow">Заявка</div>',
+      '<h2 id="vm-lead-modal-title">Оставить заявку</h2>',
+      '<p>Оставьте телефон, и мы подскажем свободную автовышку, время подачи и стоимость.</p>'
+    ].join("");
+    form.appendChild(buildInput("text", "name", "Ваше имя", false, 30));
+    form.appendChild(buildInput("tel", "phone", "", true));
+
+    select.name = "height";
+    select.setAttribute("aria-label", "Высота автовышки");
+    select.innerHTML = [
+      '<option value="">Высота автовышки</option>',
+      '<option value="22">22 метра</option>',
+      '<option value="28">28 метров</option>',
+      '<option value="unknown">Нужна консультация</option>'
+    ].join("");
+    form.appendChild(select);
+
+    button.type = "submit";
+    button.textContent = "Оставить заявку";
+    form.appendChild(button);
+
+    dialog.appendChild(close);
+    dialog.appendChild(form);
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+
+    function closeModal() {
+      modal.classList.remove("vm-lead-modal--open");
+      modal.setAttribute("aria-hidden", "true");
+      document.documentElement.classList.remove("vm-lead-modal-open");
+    }
+
+    modal.addEventListener("click", function (event) {
+      if (event.target === modal) closeModal();
+    });
+    close.addEventListener("click", closeModal);
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && modal.classList.contains("vm-lead-modal--open")) closeModal();
+    });
+  }
+
+  function openLeadModal(trigger) {
+    var modal = document.querySelector(".vm-lead-modal");
+    if (!modal) return;
+
+    var title = modal.querySelector("h2");
+    var button = modal.querySelector('button[type="submit"]');
+    var phone = modal.querySelector('input[type="tel"]');
+    var isFleet = !!(trigger && trigger.closest(".vm-fleet-card"));
+
+    if (title) title.textContent = isFleet ? "Забронировать автовышку" : "Оставить заявку";
+    if (button) button.textContent = isFleet ? "Забронировать" : "Оставить заявку";
+
+    modal.classList.add("vm-lead-modal--open");
+    modal.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("vm-lead-modal-open");
+
+    window.setTimeout(function () {
+      if (phone) phone.focus({ preventScroll: true });
+    }, 80);
+  }
+
+  function enableDesktopLeadModal() {
+    var desktopQuery = window.matchMedia("(min-width: 1025px)");
+
+    function isDesktopLeadButton(anchor) {
+      if (!desktopQuery.matches) return false;
+      if (!anchor) return false;
+      if (anchor.classList.contains("vm-services-cta__phone")) return false;
+      if (anchor.classList.contains("vm-header-phone")) return false;
+      if (anchor.classList.contains("vm-mobile-call")) return false;
+      if (anchor.classList.contains("vm-floating-call")) return false;
+      if (anchor.classList.contains("vm-mobile-nav-call")) return false;
+      if (anchor.classList.contains("vm-home-mobile-cta__phone")) return false;
+      return anchor.classList.contains("vm-services-button") || anchor.classList.contains("btn");
+    }
+
+    function syncDesktopLabels() {
+      document.querySelectorAll('a[href^="tel:"].vm-services-button, a[href^="tel:"].btn').forEach(function (anchor) {
+        if (anchor.closest(".vm-fleet-card")) return;
+        if (!anchor.hasAttribute("data-vm-original-html")) {
+          anchor.setAttribute("data-vm-original-html", anchor.innerHTML);
+        }
+
+        if (desktopQuery.matches) {
+          anchor.textContent = "Оставить заявку";
+          anchor.setAttribute("aria-label", "Оставить заявку");
+        } else {
+          anchor.innerHTML = anchor.getAttribute("data-vm-original-html");
+          anchor.removeAttribute("aria-label");
+        }
+      });
+    }
+
+    syncDesktopLabels();
+    if (desktopQuery.addEventListener) {
+      desktopQuery.addEventListener("change", syncDesktopLabels);
+    } else if (desktopQuery.addListener) {
+      desktopQuery.addListener(syncDesktopLabels);
+    }
+
+    document.addEventListener("click", function (event) {
+      var anchor = event.target.closest('a[href^="tel:"], a[href^="#form-field"]');
+      if (!isDesktopLeadButton(anchor)) return;
+
+      event.preventDefault();
+      openLeadModal(anchor);
+    });
+  }
+
   function addMobileHeaderActions() {
     var header = document.querySelector(".whb-header");
     var mobileCenter = document.querySelector(".whb-mobile-center");
@@ -413,6 +548,11 @@ document.addEventListener("submit", function (event) {
     document.addEventListener("click", function (event) {
       var anchor = event.target.closest('a[href^="#form-field"]');
       if (!anchor) return;
+      if (window.matchMedia("(min-width: 1025px)").matches && (anchor.classList.contains("btn") || anchor.classList.contains("vm-services-button"))) {
+        event.preventDefault();
+        openLeadModal(anchor);
+        return;
+      }
       var target = document.querySelector(anchor.getAttribute("href"));
       if (!target) return;
       event.preventDefault();
@@ -553,9 +693,11 @@ document.addEventListener("submit", function (event) {
 
   ready(function () {
     enhanceHomePage();
+    createLeadModal();
     prepareLeadForms();
     preparePhoneInputs();
     improvePrimaryActions();
+    enableDesktopLeadModal();
     enhanceFooter();
     addDesktopHeaderPhone();
     addMobileHeaderActions();
