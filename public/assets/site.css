@@ -2707,35 +2707,12 @@ form :is(input:not([type="hidden"]):not([type="submit"]):not([type="button"]):no
   box-shadow: 0 14px 26px rgba(241, 90, 36, 0.24);
 }
 
-/* Keep iOS Safari chrome from sampling the modal backdrop color. */
-html,
-body {
-  background-color: #fff;
-}
-
-.vm-lead-modal {
-  isolation: isolate;
-  background: transparent !important;
-}
-
-.vm-lead-modal::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: rgba(8, 36, 72, 0.58);
-  pointer-events: none;
-}
-
-.vm-lead-modal > * {
-  position: relative;
-  z-index: 1;
-}
-
-@supports (height: 100dvh) {
-  .vm-lead-modal {
-    inset: 0 auto auto 0 !important;
-    width: 100% !important;
-    height: 100dvh !important;
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 1024px) {
+    html.vm-lead-modal-open,
+    html:has(.wd-side-hidden.wd-opened) {
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+    }
   }
 }
