@@ -500,11 +500,10 @@ document.addEventListener("submit", function (event) {
     }, 80);
   }
 
-  function enableDesktopLeadModal() {
+  function enableLeadModalActions() {
     var desktopQuery = window.matchMedia("(min-width: 1025px)");
 
-    function isDesktopLeadButton(anchor) {
-      if (!desktopQuery.matches) return false;
+    function isLeadModalButton(anchor) {
       if (!anchor) return false;
       if (anchor.classList.contains("vm-services-cta__phone")) return false;
       if (anchor.classList.contains("vm-header-phone")) return false;
@@ -512,6 +511,8 @@ document.addEventListener("submit", function (event) {
       if (anchor.classList.contains("vm-floating-call")) return false;
       if (anchor.classList.contains("vm-mobile-nav-call")) return false;
       if (anchor.classList.contains("vm-home-mobile-cta__phone")) return false;
+      if (anchor.closest(".vm-fleet-card")) return anchor.classList.contains("vm-services-button");
+      if (!desktopQuery.matches) return false;
       return anchor.classList.contains("vm-services-button") || anchor.classList.contains("btn");
     }
 
@@ -542,7 +543,7 @@ document.addEventListener("submit", function (event) {
 
     document.addEventListener("click", function (event) {
       var anchor = event.target.closest('a[href^="tel:"], a[href^="#form-field"], a[href="#contacts"]');
-      if (!isDesktopLeadButton(anchor)) return;
+      if (!isLeadModalButton(anchor)) return;
 
       event.preventDefault();
       event.stopPropagation();
@@ -593,7 +594,7 @@ document.addEventListener("submit", function (event) {
     document.addEventListener("click", function (event) {
       var anchor = event.target.closest('a[href^="#form-field"]');
       if (!anchor) return;
-      if (window.matchMedia("(min-width: 1025px)").matches && (anchor.classList.contains("btn") || anchor.classList.contains("vm-services-button"))) {
+      if ((window.matchMedia("(min-width: 1025px)").matches || anchor.closest(".vm-fleet-card")) && (anchor.classList.contains("btn") || anchor.classList.contains("vm-services-button"))) {
         event.preventDefault();
         openLeadModal(anchor);
         return;
@@ -742,7 +743,7 @@ document.addEventListener("submit", function (event) {
     prepareLeadForms();
     preparePhoneInputs();
     improvePrimaryActions();
-    enableDesktopLeadModal();
+    enableLeadModalActions();
     enhanceFooter();
     addDesktopHeaderPhone();
     addMobileHeaderActions();
