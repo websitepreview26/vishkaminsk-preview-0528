@@ -177,21 +177,40 @@ document.addEventListener("submit", function (event) {
         botcheck.style.display = "none";
       }
 
+      function updateRequiredMessage(field) {
+        if (!field.required) return;
+        if (!String(field.value || "").trim()) {
+          field.setCustomValidity(field.type === "tel" ? "Введите номер телефона" : "Заполните это поле");
+          field.setAttribute("data-vm-validity", "required");
+        } else if (field.getAttribute("data-vm-validity") === "required") {
+          field.setCustomValidity("");
+          field.removeAttribute("data-vm-validity");
+        }
+      }
+
       form.querySelectorAll("input, select, textarea").forEach(function (field) {
+        updateRequiredMessage(field);
+
         field.addEventListener("invalid", function () {
-          if (field.validity.valueMissing) {
-            field.setCustomValidity(field.type === "tel" ? "Введите номер телефона" : "Заполните это поле");
-          }
+          updateRequiredMessage(field);
         });
 
         field.addEventListener("input", function () {
           field.setCustomValidity("");
+          field.removeAttribute("data-vm-validity");
+          updateRequiredMessage(field);
         });
 
         field.addEventListener("change", function () {
           field.setCustomValidity("");
+          field.removeAttribute("data-vm-validity");
+          updateRequiredMessage(field);
         });
       });
+
+      form.addEventListener("submit", function () {
+        form.querySelectorAll("input, select, textarea").forEach(updateRequiredMessage);
+      }, true);
     });
   }
 
@@ -291,6 +310,12 @@ document.addEventListener("submit", function (event) {
 
       function validatePhone() {
         var digits = getBelarusPhoneDigits(input.value);
+        if (input.required && !input.value) {
+          input.setCustomValidity("Введите номер телефона");
+          input.setAttribute("data-vm-validity", "required");
+          return;
+        }
+        input.removeAttribute("data-vm-validity");
         input.setCustomValidity(!input.value || digits.length === 9 ? "" : "Введите номер в формате +375 29 605-11-00");
       }
 
