@@ -2356,7 +2356,7 @@ html {
   min-width: 0;
   height: auto !important;
   min-height: calc(var(--wd-form-height, 42px) - 2px);
-  padding: 0 0 0 8px !important;
+  padding: 0 0 0 0.28em !important;
   border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
