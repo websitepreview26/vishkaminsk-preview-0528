@@ -2,6 +2,34 @@
 var WEB3FORMS_ACCESS_KEY = "76986f8c-be83-480a-a5c9-7eb7a318ba20";
 var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
+function normalizeBelarusPhoneForSubmit(value) {
+  var digits = String(value || "").replace(/\D/g, "");
+
+  if (digits.indexOf("375") === 0) {
+    digits = digits.slice(3);
+  } else if (digits.indexOf("80") === 0) {
+    digits = digits.slice(2);
+  } else if (digits.charAt(0) === "0") {
+    digits = digits.slice(1);
+  }
+
+  digits = digits.slice(0, 9);
+  if (!digits) return "";
+
+  var code = digits.slice(0, 2);
+  var first = digits.slice(2, 5);
+  var second = digits.slice(5, 7);
+  var third = digits.slice(7, 9);
+  var formatted = "+375";
+
+  if (code) formatted += " " + code;
+  if (first) formatted += " " + first;
+  if (second) formatted += "-" + second;
+  if (third) formatted += "-" + third;
+
+  return formatted;
+}
+
 document.addEventListener("submit", function (event) {
   var form = event.target;
   if (!(form instanceof HTMLFormElement)) return;
@@ -55,7 +83,7 @@ document.addEventListener("submit", function (event) {
   var data = new FormData(form);
   var name = data.get("name") || "";
   var email = data.get("email") || "";
-  var phone = data.get("phone") || "";
+  var phone = normalizeBelarusPhoneForSubmit(data.get("phone") || "");
   var message = data.get("message") || "";
   var height = data.get("height") || "";
 
@@ -186,117 +214,86 @@ document.addEventListener("submit", function (event) {
     return formatted;
   }
 
-  function preparePhoneInputs() {
-    var phonePrefix = "+375";
-    var phonePrefixLength = phonePrefix.length;
+  function formatBelarusPhoneLocal(value) {
+    var digits = getBelarusPhoneDigits(value);
+    var code = digits.slice(0, 2);
+    var first = digits.slice(2, 5);
+    var second = digits.slice(5, 7);
+    var third = digits.slice(7, 9);
+    var formatted = "";
 
+    if (code) formatted += code;
+    if (first) formatted += " " + first;
+    if (second) formatted += "-" + second;
+    if (third) formatted += "-" + third;
+
+    return formatted;
+  }
+
+  function getPhoneCursorByDigitCount(value, digitCount) {
+    var seen = 0;
+    var index;
+
+    if (digitCount <= 0) return 0;
+
+    for (index = 0; index < value.length; index += 1) {
+      if (/\d/.test(value.charAt(index))) {
+        seen += 1;
+        if (seen >= digitCount) return index + 1;
+      }
+    }
+
+    return value.length;
+  }
+
+  function preparePhoneInputs() {
     document.querySelectorAll('input[type="tel"]').forEach(function (input) {
-      input.placeholder = "+375 __ ___-__-__";
+      input.placeholder = "__ ___-__-__";
       input.inputMode = "tel";
       input.autocomplete = "tel";
       input.removeAttribute("pattern");
       input.removeAttribute("title");
+      input.classList.add("vm-phone-field__input");
+
+      if (!input.parentElement || !input.parentElement.classList.contains("vm-phone-field")) {
+        var wrapper = document.createElement("span");
+        var prefix = document.createElement("span");
+
+        wrapper.className = "vm-phone-field";
+        prefix.className = "vm-phone-field__prefix";
+        prefix.textContent = "+375";
+        prefix.setAttribute("aria-hidden", "true");
+
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(prefix);
+        wrapper.appendChild(input);
+      }
 
       function validatePhone() {
         var digits = getBelarusPhoneDigits(input.value);
         input.setCustomValidity(!input.value || digits.length === 9 ? "" : "Введите номер в формате +375 29 605-11-00");
       }
 
-      function getPhoneCursorBoundary() {
-        if (input.value.indexOf(phonePrefix) !== 0) return 0;
-        return input.value.charAt(phonePrefixLength) === " " ? phonePrefixLength + 1 : phonePrefixLength;
-      }
-
-      function keepCursorAfterPrefix() {
-        var boundary = getPhoneCursorBoundary();
-        if (!boundary) return;
-
-        var start = input.selectionStart;
-        var end = input.selectionEnd;
-
-        if (start === null || end === null) return;
-        if (start >= boundary && end >= boundary) return;
-
-        start = Math.max(start, boundary);
-        end = Math.max(end, boundary);
-        input.setSelectionRange(start, end);
-      }
-
-      function moveCursorAfterPrefixSoon() {
-        window.setTimeout(keepCursorAfterPrefix, 0);
-        window.setTimeout(keepCursorAfterPrefix, 20);
-        if (window.requestAnimationFrame) {
-          window.requestAnimationFrame(keepCursorAfterPrefix);
-        }
-      }
-
       input.addEventListener("focus", function () {
-        input.value = formatBelarusPhone(input.value, true);
-        moveCursorAfterPrefixSoon();
+        input.value = formatBelarusPhoneLocal(input.value);
         validatePhone();
       });
 
       input.addEventListener("blur", function () {
-        input.value = formatBelarusPhone(input.value, false);
+        input.value = formatBelarusPhoneLocal(input.value);
         validatePhone();
-      });
-
-      input.addEventListener("keydown", function (event) {
-        var boundary = getPhoneCursorBoundary();
-        if (!boundary) return;
-
-        var start = input.selectionStart;
-        var end = input.selectionEnd;
-
-        if (start === null || end === null) return;
-
-        if (start < boundary || end < boundary) {
-          keepCursorAfterPrefix();
-        }
-
-        if ((event.key === "Backspace" && start <= boundary && start === end) ||
-            (event.key === "Delete" && start < boundary) ||
-            (event.key === "ArrowLeft" && start <= boundary && start === end) ||
-            event.key === "Home") {
-          event.preventDefault();
-          keepCursorAfterPrefix();
-        }
-      });
-
-      input.addEventListener("beforeinput", function (event) {
-        var boundary = getPhoneCursorBoundary();
-        if (!boundary) return;
-
-        var start = input.selectionStart;
-        var end = input.selectionEnd;
-
-        if (start === null || end === null) return;
-
-        if ((event.inputType === "deleteContentBackward" && start <= boundary && start === end) ||
-            (event.inputType === "deleteContentForward" && start < boundary) ||
-            (event.inputType && event.inputType.indexOf("delete") === 0 && start < boundary)) {
-          event.preventDefault();
-          keepCursorAfterPrefix();
-        }
       });
 
       input.addEventListener("input", function () {
-        var cursorAtEnd = input.selectionStart === input.value.length;
-        var formatted = formatBelarusPhone(input.value, document.activeElement === input);
-        if (formatted !== input.value) input.value = formatted;
-        if (cursorAtEnd) input.setSelectionRange(input.value.length, input.value.length);
-        keepCursorAfterPrefix();
+        var cursor = input.selectionStart;
+        var digitCountBeforeCursor = cursor === null ? 9 : getBelarusPhoneDigits(input.value.slice(0, cursor)).length;
+        var formatted = formatBelarusPhoneLocal(input.value);
+        if (formatted !== input.value) {
+          input.value = formatted;
+          cursor = getPhoneCursorByDigitCount(formatted, digitCountBeforeCursor);
+          input.setSelectionRange(cursor, cursor);
+        }
         validatePhone();
-      });
-
-      input.addEventListener("pointerup", moveCursorAfterPrefixSoon);
-      input.addEventListener("mouseup", moveCursorAfterPrefixSoon);
-      input.addEventListener("touchend", moveCursorAfterPrefixSoon);
-      input.addEventListener("click", moveCursorAfterPrefixSoon);
-      input.addEventListener("keyup", moveCursorAfterPrefixSoon);
-      input.addEventListener("select", moveCursorAfterPrefixSoon);
-      document.addEventListener("selectionchange", function () {
-        if (document.activeElement === input) keepCursorAfterPrefix();
       });
 
       input.addEventListener("invalid", function () {
