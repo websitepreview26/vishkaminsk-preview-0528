@@ -2,6 +2,13 @@
 var WEB3FORMS_ACCESS_KEY = "76986f8c-be83-480a-a5c9-7eb7a318ba20";
 var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
+function formatLeadHeight(value) {
+  if (value === "22") return "22 метра";
+  if (value === "28") return "28 метров";
+  if (value === "unknown") return "Нужна консультация";
+  return "Не указано";
+}
+
 function normalizeBelarusPhoneForSubmit(value) {
   var digits = String(value || "").replace(/\D/g, "");
 
@@ -85,22 +92,17 @@ document.addEventListener("submit", function (event) {
   var email = data.get("email") || "";
   var phone = normalizeBelarusPhoneForSubmit(data.get("phone") || "");
   var message = data.get("message") || "";
-  var height = data.get("height") || "";
+  var height = formatLeadHeight(data.get("height") || "");
 
   data.set("access_key", WEB3FORMS_ACCESS_KEY);
   data.set("subject", "Новая заявка с vyshka24.by");
   data.set("from_name", "vyshka24.by");
   data.set("botcheck", data.get("botcheck") || "");
-  if (name) data.set("name", name);
+  data.set("name", name || "Не указано");
   if (email) data.set("email", email);
-  if (phone) data.set("phone", phone);
+  data.set("phone", phone || "Не указан");
   if (message) data.set("message", message);
-  if (height) data.set("height", height);
-  data.set("Имя", name || "Не указано");
-  data.set("Телефон", phone || "Не указан");
-  if (email) data.set("Email", email);
-  if (height) data.set("Высота", height);
-  if (message) data.set("Сообщение", message);
+  data.set("height", height);
 
   fetch(WEB3FORMS_ENDPOINT, {
     method: "POST",
