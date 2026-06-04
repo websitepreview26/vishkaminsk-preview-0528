@@ -442,6 +442,13 @@ document.addEventListener("submit", function (event) {
       var title = secondColumn ? secondColumn.querySelector(".widget-title") : null;
       if (title) title.textContent = "Навигация";
 
+      if (main && !main.querySelector(".vm-footer-legal")) {
+        var legal = document.createElement("div");
+        legal.className = "vm-footer-legal";
+        legal.innerHTML = '<span>Индивидуальный предприниматель Масло Олег Валерьевич</span><span>УНП 193021885</span>';
+        main.appendChild(legal);
+      }
+
       if (main && !main.querySelector(".vm-footer-bottom")) {
         var bottom = document.createElement("div");
         bottom.className = "vm-footer-bottom";
