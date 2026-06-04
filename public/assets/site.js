@@ -187,7 +187,7 @@ document.addEventListener("submit", function (event) {
   }
 
   function preparePhoneInputs() {
-    var phonePrefix = "+375 ";
+    var phonePrefix = "+375";
     var phonePrefixLength = phonePrefix.length;
 
     document.querySelectorAll('input[type="tel"]').forEach(function (input) {
@@ -202,16 +202,23 @@ document.addEventListener("submit", function (event) {
         input.setCustomValidity(!input.value || digits.length === 9 ? "" : "Введите номер в формате +375 29 605-11-00");
       }
 
+      function getPhoneCursorBoundary() {
+        if (input.value.indexOf(phonePrefix) !== 0) return 0;
+        return input.value.charAt(phonePrefixLength) === " " ? phonePrefixLength + 1 : phonePrefixLength;
+      }
+
       function keepCursorAfterPrefix() {
-        if (input.value.indexOf(phonePrefix) !== 0) return;
+        var boundary = getPhoneCursorBoundary();
+        if (!boundary) return;
+
         var start = input.selectionStart;
         var end = input.selectionEnd;
 
         if (start === null || end === null) return;
-        if (start >= phonePrefixLength && end >= phonePrefixLength) return;
+        if (start >= boundary && end >= boundary) return;
 
-        start = Math.max(start, phonePrefixLength);
-        end = Math.max(end, phonePrefixLength);
+        start = Math.max(start, boundary);
+        end = Math.max(end, boundary);
         input.setSelectionRange(start, end);
       }
 
@@ -235,20 +242,21 @@ document.addEventListener("submit", function (event) {
       });
 
       input.addEventListener("keydown", function (event) {
-        if (input.value.indexOf(phonePrefix) !== 0) return;
+        var boundary = getPhoneCursorBoundary();
+        if (!boundary) return;
 
         var start = input.selectionStart;
         var end = input.selectionEnd;
 
         if (start === null || end === null) return;
 
-        if (start < phonePrefixLength || end < phonePrefixLength) {
+        if (start < boundary || end < boundary) {
           keepCursorAfterPrefix();
         }
 
-        if ((event.key === "Backspace" && start <= phonePrefixLength && start === end) ||
-            (event.key === "Delete" && start < phonePrefixLength) ||
-            (event.key === "ArrowLeft" && start <= phonePrefixLength && start === end) ||
+        if ((event.key === "Backspace" && start <= boundary && start === end) ||
+            (event.key === "Delete" && start < boundary) ||
+            (event.key === "ArrowLeft" && start <= boundary && start === end) ||
             event.key === "Home") {
           event.preventDefault();
           keepCursorAfterPrefix();
@@ -256,16 +264,17 @@ document.addEventListener("submit", function (event) {
       });
 
       input.addEventListener("beforeinput", function (event) {
-        if (input.value.indexOf(phonePrefix) !== 0) return;
+        var boundary = getPhoneCursorBoundary();
+        if (!boundary) return;
 
         var start = input.selectionStart;
         var end = input.selectionEnd;
 
         if (start === null || end === null) return;
 
-        if ((event.inputType === "deleteContentBackward" && start <= phonePrefixLength && start === end) ||
-            (event.inputType === "deleteContentForward" && start < phonePrefixLength) ||
-            (event.inputType && event.inputType.indexOf("delete") === 0 && start < phonePrefixLength)) {
+        if ((event.inputType === "deleteContentBackward" && start <= boundary && start === end) ||
+            (event.inputType === "deleteContentForward" && start < boundary) ||
+            (event.inputType && event.inputType.indexOf("delete") === 0 && start < boundary)) {
           event.preventDefault();
           keepCursorAfterPrefix();
         }
