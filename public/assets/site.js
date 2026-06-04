@@ -176,6 +176,22 @@ document.addEventListener("submit", function (event) {
         botcheck.setAttribute("aria-hidden", "true");
         botcheck.style.display = "none";
       }
+
+      form.querySelectorAll("input, select, textarea").forEach(function (field) {
+        field.addEventListener("invalid", function () {
+          if (field.validity.valueMissing) {
+            field.setCustomValidity(field.type === "tel" ? "Введите номер телефона" : "Заполните это поле");
+          }
+        });
+
+        field.addEventListener("input", function () {
+          field.setCustomValidity("");
+        });
+
+        field.addEventListener("change", function () {
+          field.setCustomValidity("");
+        });
+      });
     });
   }
 
@@ -473,8 +489,9 @@ document.addEventListener("submit", function (event) {
     }
 
     function syncDesktopLabels() {
-      document.querySelectorAll('a[href^="tel:"].vm-services-button, a[href^="tel:"].btn').forEach(function (anchor) {
+      document.querySelectorAll('a.vm-services-button, a.btn').forEach(function (anchor) {
         if (anchor.closest(".vm-fleet-card")) return;
+        if (!/^(tel:|#contacts|#form-field)/.test(anchor.getAttribute("href") || "")) return;
         if (!anchor.hasAttribute("data-vm-original-html")) {
           anchor.setAttribute("data-vm-original-html", anchor.innerHTML);
         }
@@ -497,12 +514,13 @@ document.addEventListener("submit", function (event) {
     }
 
     document.addEventListener("click", function (event) {
-      var anchor = event.target.closest('a[href^="tel:"], a[href^="#form-field"]');
+      var anchor = event.target.closest('a[href^="tel:"], a[href^="#form-field"], a[href="#contacts"]');
       if (!isDesktopLeadButton(anchor)) return;
 
       event.preventDefault();
+      event.stopPropagation();
       openLeadModal(anchor);
-    });
+    }, true);
   }
 
   function addMobileHeaderActions() {
