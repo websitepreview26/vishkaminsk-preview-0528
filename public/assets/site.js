@@ -204,13 +204,23 @@ document.addEventListener("submit", function (event) {
 
       function keepCursorAfterPrefix() {
         if (input.value.indexOf(phonePrefix) !== 0) return;
-        var start = Math.max(input.selectionStart || 0, phonePrefixLength);
-        var end = Math.max(input.selectionEnd || 0, phonePrefixLength);
+        var start = input.selectionStart;
+        var end = input.selectionEnd;
+
+        if (start === null || end === null) return;
+        if (start >= phonePrefixLength && end >= phonePrefixLength) return;
+
+        start = Math.max(start, phonePrefixLength);
+        end = Math.max(end, phonePrefixLength);
         input.setSelectionRange(start, end);
       }
 
       function moveCursorAfterPrefixSoon() {
         window.setTimeout(keepCursorAfterPrefix, 0);
+        window.setTimeout(keepCursorAfterPrefix, 20);
+        if (window.requestAnimationFrame) {
+          window.requestAnimationFrame(keepCursorAfterPrefix);
+        }
       }
 
       input.addEventListener("focus", function () {
@@ -227,15 +237,35 @@ document.addEventListener("submit", function (event) {
       input.addEventListener("keydown", function (event) {
         if (input.value.indexOf(phonePrefix) !== 0) return;
 
-        var start = input.selectionStart || 0;
-        var end = input.selectionEnd || 0;
+        var start = input.selectionStart;
+        var end = input.selectionEnd;
+
+        if (start === null || end === null) return;
 
         if (start < phonePrefixLength || end < phonePrefixLength) {
           keepCursorAfterPrefix();
         }
 
         if ((event.key === "Backspace" && start <= phonePrefixLength && start === end) ||
-            (event.key === "Delete" && start < phonePrefixLength)) {
+            (event.key === "Delete" && start < phonePrefixLength) ||
+            (event.key === "ArrowLeft" && start <= phonePrefixLength && start === end) ||
+            event.key === "Home") {
+          event.preventDefault();
+          keepCursorAfterPrefix();
+        }
+      });
+
+      input.addEventListener("beforeinput", function (event) {
+        if (input.value.indexOf(phonePrefix) !== 0) return;
+
+        var start = input.selectionStart;
+        var end = input.selectionEnd;
+
+        if (start === null || end === null) return;
+
+        if ((event.inputType === "deleteContentBackward" && start <= phonePrefixLength && start === end) ||
+            (event.inputType === "deleteContentForward" && start < phonePrefixLength) ||
+            (event.inputType && event.inputType.indexOf("delete") === 0 && start < phonePrefixLength)) {
           event.preventDefault();
           keepCursorAfterPrefix();
         }
@@ -250,9 +280,15 @@ document.addEventListener("submit", function (event) {
         validatePhone();
       });
 
+      input.addEventListener("pointerup", moveCursorAfterPrefixSoon);
+      input.addEventListener("mouseup", moveCursorAfterPrefixSoon);
+      input.addEventListener("touchend", moveCursorAfterPrefixSoon);
       input.addEventListener("click", moveCursorAfterPrefixSoon);
       input.addEventListener("keyup", moveCursorAfterPrefixSoon);
       input.addEventListener("select", moveCursorAfterPrefixSoon);
+      document.addEventListener("selectionchange", function () {
+        if (document.activeElement === input) keepCursorAfterPrefix();
+      });
 
       input.addEventListener("invalid", function () {
         if (input.validity.valueMissing) return;
