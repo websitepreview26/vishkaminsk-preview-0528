@@ -2359,3 +2359,26 @@ html {
   border: 0 !important;
   box-shadow: none !important;
 }
+
+form :is(input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea):not(.vm-phone-field__input),
+.vm-phone-field {
+  border: 1px solid var(--wd-form-brd-color, #d9d9d9) !important;
+  border-radius: 999px !important;
+  background-color: var(--wd-form-bg, #fff) !important;
+  box-shadow: none !important;
+}
+
+form :is(input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), select):not(.vm-phone-field__input) {
+  height: var(--wd-form-height, 48px);
+}
+
+form textarea {
+  min-height: 112px;
+  border-radius: 24px !important;
+}
+
+form :is(input:not([type="hidden"]):not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), select, textarea):not(.vm-phone-field__input):focus,
+.vm-phone-field:focus-within {
+  border-color: var(--wd-form-brd-color-focus, var(--wd-primary-color, #242424)) !important;
+  box-shadow: none !important;
+}
