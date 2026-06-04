@@ -2,27 +2,6 @@
 var WEB3FORMS_ACCESS_KEY = "76986f8c-be83-480a-a5c9-7eb7a318ba20";
 var WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
 
-function isIOSWebKit() {
-  var platform = navigator.platform || "";
-  return /iP(ad|hone|od)/.test(platform) || (platform === "MacIntel" && navigator.maxTouchPoints > 1);
-}
-
-function syncVisualViewportHeight() {
-  var viewport = window.visualViewport;
-  if (!viewport) return;
-
-  function updateHeight() {
-    document.documentElement.style.setProperty("--vm-visual-viewport-height", viewport.height + "px");
-  }
-
-  updateHeight();
-  viewport.addEventListener("resize", updateHeight);
-  viewport.addEventListener("scroll", updateHeight);
-  window.addEventListener("orientationchange", function () {
-    window.setTimeout(updateHeight, 250);
-  });
-}
-
 function formatLeadHeight(value) {
   if (value === "22") return "22 метра";
   if (value === "28") return "28 метров";
@@ -524,9 +503,7 @@ document.addEventListener("submit", function (event) {
 
     modal.classList.add("vm-lead-modal--open");
     modal.setAttribute("aria-hidden", "false");
-    if (!isIOSWebKit()) {
-      document.documentElement.classList.add("vm-lead-modal-open");
-    }
+    document.documentElement.classList.add("vm-lead-modal-open");
 
     window.setTimeout(function () {
       if (phone) phone.focus({ preventScroll: true });
@@ -776,7 +753,6 @@ document.addEventListener("submit", function (event) {
   }
 
   ready(function () {
-    syncVisualViewportHeight();
     enhanceHomePage();
     createLeadModal();
     prepareLeadForms();

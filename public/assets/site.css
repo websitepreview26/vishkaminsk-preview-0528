@@ -2709,19 +2709,10 @@ form :is(input:not([type="hidden"]):not([type="submit"]):not([type="button"]):no
 
 @supports (-webkit-touch-callout: none) {
   @media (max-width: 1024px) {
-    .wd-close-side,
-    .vm-lead-modal,
-    .mobile-nav.wd-side-hidden-nav {
-      top: 0 !important;
-      bottom: auto !important;
-      height: var(--vm-visual-viewport-height, 100dvh) !important;
-      max-height: var(--vm-visual-viewport-height, 100dvh) !important;
-    }
-
     html.vm-lead-modal-open,
     html:has(.wd-side-hidden.wd-opened) {
       overflow-x: hidden !important;
-      overflow-y: visible !important;
+      overflow-y: auto !important;
     }
   }
 }
