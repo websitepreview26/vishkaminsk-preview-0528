@@ -2320,24 +2320,42 @@ html {
 }
 
 .vm-phone-field {
-  position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
+  box-sizing: border-box;
+  min-height: var(--wd-form-height, 42px);
+  padding: 0 15px;
+  border: var(--wd-form-brd-width, 1px) solid var(--wd-form-brd-color, #d9d9d9);
+  border-radius: var(--wd-form-brd-radius, 0);
+  background-color: var(--wd-form-bg, #fff);
+  color: var(--wd-form-color, var(--wd-text-color, #242424));
+}
+
+.vm-phone-field:focus-within {
+  border-color: var(--wd-form-brd-color-focus, var(--wd-primary-color, #242424));
 }
 
 .vm-phone-field__prefix {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  z-index: 1;
-  transform: translateY(-50%);
-  color: var(--wd-form-color, var(--wd-text-color, #242424));
+  flex: 0 0 auto;
   font: inherit;
   line-height: 1;
-  pointer-events: none;
   white-space: nowrap;
 }
 
 .vm-phone-field__input {
-  padding-left: 66px !important;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: auto !important;
+  min-height: calc(var(--wd-form-height, 42px) - 2px);
+  padding: 0 0 0 8px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+}
+
+.vm-phone-field__input:focus {
+  border: 0 !important;
+  box-shadow: none !important;
 }

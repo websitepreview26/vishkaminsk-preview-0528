@@ -267,6 +267,10 @@ document.addEventListener("submit", function (event) {
         input.parentNode.insertBefore(wrapper, input);
         wrapper.appendChild(prefix);
         wrapper.appendChild(input);
+
+        wrapper.addEventListener("click", function () {
+          input.focus();
+        });
       }
 
       function validatePhone() {
