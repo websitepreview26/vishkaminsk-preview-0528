@@ -372,7 +372,8 @@ document.addEventListener("submit", function (event) {
     card.innerHTML = [
       '<div class="vm-quick-order__eyebrow">Быстрая заявка</div>',
       "<h3>Уточнить цену и свободную автовышку</h3>",
-      "<p>Оставьте телефон, и мы подскажем подходящую высоту, время подачи и ориентир по стоимости.</p>"
+      "<p>Оставьте телефон, и мы подскажем подходящую высоту, время подачи и ориентир по стоимости.</p>",
+      '<p class="vm-order-note">Онлайн-заявки принимаем круглосуточно</p>'
     ].join("");
 
     var form = document.createElement("form");
@@ -410,6 +411,7 @@ document.addEventListener("submit", function (event) {
       "<h2>Нужна автовышка на объект?</h2>",
       "<p>Позвоните: сразу уточним детали и сориентируем по свободным машинам.</p>",
       '<a class="vm-home-mobile-cta__phone" href="tel:+375292051579">+375 29 205-15-79</a>',
+      '<span class="vm-home-mobile-cta__note">Звонки ежедневно 7:00-19:00</span>',
       '<a class="vm-home-mobile-cta__button" href="tel:+375292051579">Позвонить</a>'
     ].join("");
     hero.insertBefore(mobileCta, proof);
@@ -442,7 +444,8 @@ document.addEventListener("submit", function (event) {
     form.innerHTML = [
       '<div class="vm-lead-modal__eyebrow">Заявка</div>',
       '<h2 id="vm-lead-modal-title">Оставить заявку</h2>',
-      '<p>Оставьте телефон, и мы подскажем свободную автовышку, время подачи и стоимость.</p>'
+      '<p>Оставьте телефон, и мы подскажем свободную автовышку, время подачи и стоимость.</p>',
+      '<p class="vm-order-note">Онлайн-заявки принимаем круглосуточно</p>'
     ].join("");
     form.appendChild(buildInput("text", "name", "Ваше имя", false, 30));
     form.appendChild(buildInput("tel", "phone", "", true));
@@ -565,7 +568,10 @@ document.addEventListener("submit", function (event) {
 
     var actions = document.createElement("div");
     actions.className = "vm-mobile-header-actions";
-    actions.innerHTML = '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить +375 29 205-15-79">+375 29 205-15-79</a>';
+    actions.innerHTML = [
+      '<a class="vm-mobile-call" href="tel:+375292051579" aria-label="Позвонить +375 29 205-15-79">+375 29 205-15-79</a>',
+      '<span class="vm-mobile-call-note">Звонки 7:00-19:00</span>'
+    ].join("");
     mobileCenter.appendChild(actions);
 
   }
@@ -580,11 +586,13 @@ document.addEventListener("submit", function (event) {
     var button = headerRight ? headerRight.querySelector(".wd-button-wrapper") : null;
     if (!headerRight || !button || headerRight.querySelector(".vm-header-phone")) return;
 
-    var phone = document.createElement("a");
-    phone.className = "vm-header-phone";
-    phone.href = "tel:+375292051579";
-    phone.textContent = "+375 29 205-15-79";
-    headerRight.insertBefore(phone, button);
+    var phoneWrap = document.createElement("div");
+    phoneWrap.className = "vm-header-contact";
+    phoneWrap.innerHTML = [
+      '<a class="vm-header-phone" href="tel:+375292051579">+375 29 205-15-79</a>',
+      '<span class="vm-header-phone-note">Звонки ежедневно 7:00-19:00</span>'
+    ].join("");
+    headerRight.insertBefore(phoneWrap, button);
   }
 
   function addFloatingCall() {

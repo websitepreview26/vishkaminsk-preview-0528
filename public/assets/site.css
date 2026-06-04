@@ -159,10 +159,18 @@ body {
   display: none;
 }
 
+.vm-header-contact {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  min-height: 44px;
+}
+
 .vm-header-phone {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
   color: var(--vm-blue) !important;
   font-size: 16px;
   font-weight: 800;
@@ -173,6 +181,14 @@ body {
 
 .vm-header-phone:hover {
   color: var(--vm-orange) !important;
+}
+
+.vm-header-phone-note {
+  color: var(--vm-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .site-logo img {
@@ -449,6 +465,14 @@ body {
   height: 8px;
   border-radius: 50%;
   background: var(--vm-green);
+}
+
+.vm-order-note {
+  margin: 0;
+  color: var(--vm-green);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.35;
 }
 
 .vm-home-mobile-cta {
@@ -1916,8 +1940,10 @@ html {
 
   .vm-mobile-header-actions {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 3px;
   }
 
   .vm-mobile-call {
@@ -1930,6 +1956,14 @@ html {
     font-weight: 800;
     line-height: 1;
     text-decoration: none !important;
+    white-space: nowrap;
+  }
+
+  .vm-mobile-call-note {
+    color: var(--vm-muted);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
     white-space: nowrap;
   }
 
@@ -2148,6 +2182,13 @@ html {
   line-height: 1.45;
 }
 
+.vm-lead-modal__form .vm-order-note {
+  margin: -2px 0 4px;
+  color: var(--vm-green);
+  font-size: 13px;
+  font-weight: 800;
+}
+
 .vm-lead-modal__form button[type="submit"] {
   min-height: 52px;
   border: 0;
@@ -2319,6 +2360,15 @@ html {
     font-weight: 800;
     line-height: 1;
     white-space: nowrap;
+  }
+
+  .vm-home-mobile-cta__note {
+    display: block;
+    margin-top: 7px;
+    color: var(--vm-muted);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
   }
 
   .vm-home-mobile-cta__button {
