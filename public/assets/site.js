@@ -93,6 +93,7 @@ document.addEventListener("submit", function (event) {
   var phone = normalizeBelarusPhoneForSubmit(data.get("phone") || "");
   var message = data.get("message") || "";
   var height = formatLeadHeight(data.get("height") || "");
+  var machine = data.get("machine") || "";
 
   data.set("access_key", WEB3FORMS_ACCESS_KEY);
   data.set("subject", "Новая заявка с vyshka24.by");
@@ -103,6 +104,7 @@ document.addEventListener("submit", function (event) {
   data.set("phone", phone || "Не указан");
   if (message) data.set("message", message);
   data.set("height", height);
+  if (machine) data.set("machine", machine);
 
   fetch(WEB3FORMS_ENDPOINT, {
     method: "POST",
@@ -444,6 +446,7 @@ document.addEventListener("submit", function (event) {
     ].join("");
     form.appendChild(buildInput("text", "name", "Ваше имя", false, 30));
     form.appendChild(buildInput("tel", "phone", "", true));
+    form.appendChild(buildInput("hidden", "machine", "", false));
 
     select.name = "height";
     select.setAttribute("aria-label", "Высота автовышки");
@@ -486,10 +489,14 @@ document.addEventListener("submit", function (event) {
     var title = modal.querySelector("h2");
     var button = modal.querySelector('button[type="submit"]');
     var phone = modal.querySelector('input[type="tel"]');
-    var isFleet = !!(trigger && trigger.closest(".vm-fleet-card"));
+    var machine = modal.querySelector('input[name="machine"]');
+    var fleetCard = trigger ? trigger.closest(".vm-fleet-card") : null;
+    var fleetTitle = fleetCard && fleetCard.querySelector("h3") ? fleetCard.querySelector("h3").textContent.trim() : "";
+    var isFleet = !!fleetCard;
 
     if (title) title.textContent = isFleet ? "Забронировать автовышку" : "Оставить заявку";
     if (button) button.textContent = isFleet ? "Забронировать" : "Оставить заявку";
+    if (machine) machine.value = fleetTitle;
 
     modal.classList.add("vm-lead-modal--open");
     modal.setAttribute("aria-hidden", "false");
