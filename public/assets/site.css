@@ -2330,6 +2330,11 @@ html {
   border-radius: var(--wd-form-brd-radius, 0);
   background-color: var(--wd-form-bg, #fff);
   color: var(--wd-form-color, var(--wd-text-color, #242424));
+  font-family: var(--wd-form-font-family, var(--wd-text-font, inherit));
+  font-size: var(--wd-form-font-size, 16px);
+  font-weight: var(--wd-form-font-weight, 400);
+  letter-spacing: 0;
+  line-height: 1.2;
 }
 
 .vm-phone-field:focus-within {
@@ -2338,7 +2343,10 @@ html {
 
 .vm-phone-field__prefix {
   flex: 0 0 auto;
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
   line-height: 1;
   white-space: nowrap;
 }
@@ -2353,6 +2361,11 @@ html {
   background: transparent !important;
   box-shadow: none !important;
   color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: 1 !important;
 }
 
 .vm-phone-field__input:focus {
