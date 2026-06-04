@@ -187,6 +187,9 @@ document.addEventListener("submit", function (event) {
   }
 
   function preparePhoneInputs() {
+    var phonePrefix = "+375 ";
+    var phonePrefixLength = phonePrefix.length;
+
     document.querySelectorAll('input[type="tel"]').forEach(function (input) {
       input.placeholder = "+375 __ ___-__-__";
       input.inputMode = "tel";
@@ -199,8 +202,20 @@ document.addEventListener("submit", function (event) {
         input.setCustomValidity(!input.value || digits.length === 9 ? "" : "Введите номер в формате +375 29 605-11-00");
       }
 
+      function keepCursorAfterPrefix() {
+        if (input.value.indexOf(phonePrefix) !== 0) return;
+        var start = Math.max(input.selectionStart || 0, phonePrefixLength);
+        var end = Math.max(input.selectionEnd || 0, phonePrefixLength);
+        input.setSelectionRange(start, end);
+      }
+
+      function moveCursorAfterPrefixSoon() {
+        window.setTimeout(keepCursorAfterPrefix, 0);
+      }
+
       input.addEventListener("focus", function () {
         input.value = formatBelarusPhone(input.value, true);
+        moveCursorAfterPrefixSoon();
         validatePhone();
       });
 
@@ -209,13 +224,35 @@ document.addEventListener("submit", function (event) {
         validatePhone();
       });
 
+      input.addEventListener("keydown", function (event) {
+        if (input.value.indexOf(phonePrefix) !== 0) return;
+
+        var start = input.selectionStart || 0;
+        var end = input.selectionEnd || 0;
+
+        if (start < phonePrefixLength || end < phonePrefixLength) {
+          keepCursorAfterPrefix();
+        }
+
+        if ((event.key === "Backspace" && start <= phonePrefixLength && start === end) ||
+            (event.key === "Delete" && start < phonePrefixLength)) {
+          event.preventDefault();
+          keepCursorAfterPrefix();
+        }
+      });
+
       input.addEventListener("input", function () {
         var cursorAtEnd = input.selectionStart === input.value.length;
-        var formatted = formatBelarusPhone(input.value, false);
+        var formatted = formatBelarusPhone(input.value, document.activeElement === input);
         if (formatted !== input.value) input.value = formatted;
         if (cursorAtEnd) input.setSelectionRange(input.value.length, input.value.length);
+        keepCursorAfterPrefix();
         validatePhone();
       });
+
+      input.addEventListener("click", moveCursorAfterPrefixSoon);
+      input.addEventListener("keyup", moveCursorAfterPrefixSoon);
+      input.addEventListener("select", moveCursorAfterPrefixSoon);
 
       input.addEventListener("invalid", function () {
         if (input.validity.valueMissing) return;
