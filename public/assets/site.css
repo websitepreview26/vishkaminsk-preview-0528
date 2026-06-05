@@ -1096,9 +1096,11 @@ body {
 }
 
 .vm-fleet-card > img {
+  display: block;
   width: 100%;
-  height: 260px;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: contain;
 }
 
 .vm-fleet-card__body {
@@ -1748,7 +1750,7 @@ html {
   }
 
   .vm-fleet-card > img {
-    height: 210px;
+    height: auto;
   }
 
   .vm-fleet-card__body {
