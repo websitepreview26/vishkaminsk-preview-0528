@@ -497,8 +497,8 @@ document.addEventListener("submit", function (event) {
     var fleetTitle = fleetCard && fleetCard.querySelector("h3") ? fleetCard.querySelector("h3").textContent.trim() : "";
     var isFleet = !!fleetCard;
 
-    if (title) title.textContent = isFleet ? "Забронировать автовышку" : "Оставить заявку";
-    if (button) button.textContent = isFleet ? "Забронировать" : "Оставить заявку";
+    if (title) title.textContent = isFleet ? "Уточнить наличие автовышки" : "Оставить заявку";
+    if (button) button.textContent = isFleet ? "Уточнить наличие" : "Оставить заявку";
     if (machine) machine.value = fleetTitle;
 
     modal.classList.add("vm-lead-modal--open");
