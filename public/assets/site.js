@@ -117,6 +117,13 @@ document.addEventListener("submit", function (event) {
       if (!response.ok || !result.success) {
         throw new Error(result.message || "Не удалось отправить заявку.");
       }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "vm_lead_submit_success",
+        lead_form: form.className || form.getAttribute("id") || "site_form",
+        lead_machine: machine || "",
+        lead_height: height || ""
+      });
       showNote("Заявка отправлена. Мы скоро свяжемся с вами.", "success");
       form.reset();
       setButtonText("Заявка отправлена");

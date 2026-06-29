@@ -1,5 +1,6 @@
 .DS_Store
 source-download/
+outputs/
 node_modules/
 .env
 *.log
