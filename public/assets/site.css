@@ -711,12 +711,23 @@ body {
 .vm-footer-bottom {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 18px;
   margin-top: 16px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.52);
   font-size: 13px;
+}
+
+.vm-footer-dev-link {
+  color: rgba(255, 255, 255, 0.62) !important;
+  text-decoration: none !important;
+}
+
+.vm-footer-dev-link:hover,
+.vm-footer-dev-link:focus {
+  color: #fff !important;
 }
 
 .scrollToTop,

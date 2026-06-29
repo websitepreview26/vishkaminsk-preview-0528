@@ -653,7 +653,7 @@ document.addEventListener("submit", function (event) {
       if (main && !main.querySelector(".vm-footer-bottom")) {
         var bottom = document.createElement("div");
         bottom.className = "vm-footer-bottom";
-        bottom.innerHTML = '<span>© vyshka24.by</span><span>Аренда автовышек 22–28 м</span>';
+        bottom.innerHTML = '<span>© vyshka24.by</span><span>Аренда автовышек 22–28 м</span><a class="vm-footer-dev-link" href="https://t.me/vvgro" target="_blank" rel="noopener">Написать разработчику</a>';
         main.appendChild(bottom);
       }
     });
